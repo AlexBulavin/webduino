@@ -343,66 +343,8 @@ static esp_err_t index_wifi_handler(httpd_req_t *req) {
   return ESP_OK;
 }
 //********************************************************************************************
-static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
-<!DOCTYPE html>
-<html>
-  <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>ESP32-CAM Область предупреждения о распознавании объекта (горизонтальная область)</title>
-        <style>
-          body{font-family:Arial,Helvetica,sans-serif;background:#181818;color:#EFEFEF;font-size:16px}h2{font-size:18px}section.main{display:flex}#menu,section.main{flex-direction:column}#menu{display:none;flex-wrap:nowrap;min-width:340px;background:#363636;padding:8px;border-radius:4px;margin-top:-10px;margin-right:10px}#content{display:flex;flex-wrap:wrap;align-items:stretch}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}figure img{display:block;width:100%;height:auto;border-radius:4px;margin-top:8px}@media (min-width: 800px) and (orientation:landscape){#content{display:flex;flex-wrap:nowrap;align-items:stretch}figure img{display:block;max-width:100%;max-height:calc(100vh - 40px);width:auto;height:auto}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}}section#buttons{display:flex;flex-wrap:nowrap;justify-content:space-between}#nav-toggle{cursor:pointer;display:block}#nav-toggle-cb{outline:0;opacity:0;width:0;height:0}#nav-toggle-cb:checked+#menu{display:flex}.input-group{display:flex;flex-wrap:nowrap;line-height:22px;margin:5px 0}.input-group>label{display:inline-block;padding-right:10px;min-width:47%}.input-group input,.input-group select{flex-grow:1}.range-max,.range-min{display:inline-block;padding:0 5px}button{display:block;margin:5px;padding:0 12px;border:0;line-height:28px;cursor:pointer;color:#fff;background:#ff3034;border-radius:5px;font-size:16px;outline:0}button:hover{background:#ff494d}button:active{background:#f21c21}button.disabled{cursor:default;background:#a0a0a0}input[type=range]{-webkit-appearance:none;width:100%;height:22px;background:#363636;cursor:pointer;margin:0}input[type=range]:focus{outline:0}input[type=range]::-webkit-slider-runnable-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-webkit-slider-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;-webkit-appearance:none;margin-top:-11.5px}input[type=range]:focus::-webkit-slider-runnable-track{background:#EFEFEF}input[type=range]::-moz-range-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-moz-range-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer}input[type=range]::-ms-track{width:100%;height:2px;cursor:pointer;background:0 0;border-color:transparent;color:transparent}input[type=range]::-ms-fill-lower{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-fill-upper{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;height:2px}input[type=range]:focus::-ms-fill-lower{background:#EFEFEF}input[type=range]:focus::-ms-fill-upper{background:#363636}.switch{display:block;position:relative;line-height:22px;font-size:16px;height:22px}.switch input{outline:0;opacity:0;width:0;height:0}.slider{width:50px;height:22px;border-radius:22px;cursor:pointer;background-color:grey}.slider,.slider:before{display:inline-block;transition:.4s}.slider:before{position:relative;content:"";border-radius:50%;height:16px;width:16px;left:4px;top:3px;background-color:#fff}input:checked+.slider{background-color:#ff3034}input:checked+.slider:before{-webkit-transform:translateX(26px);transform:translateX(26px)}select{border:1px solid #363636;font-size:14px;height:22px;outline:0;border-radius:5px}.image-container{position:relative;min-width:160px}.close{position:absolute;right:5px;top:5px;background:#ff3034;width:16px;height:16px;border-radius:100px;color:#fff;text-align:center;line-height:18px;cursor:pointer}.hidden{display:none}
-        </style>
-        <script src="https:\/\/ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script src="https:\/\/cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"> </script>
-        <script src="https:\/\/cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.1.0"> </script>       
-    </head>
-    <body>
-    <figure>
-    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="Набор" onclick="start();">
-      <div id="stream-container" class="image-container hidden">
-        <div class="close" id="close-stream">×</div>
-        <img id="stream" src="" crossorigin="anonymous" style="background-color:#000000;display:none;">
-        <table>
-          <tr>
-          <td align="left"><input type="range" id="lefttop" min="0" max="100" value="25" step="1" required></td>
-          <td align="right"><input type="range" id="righttop" min="0" max="100" value="25" step="1" required></td>
-          </tr>
-          <tr>
-          <td colspan="2"><canvas id="canvas" width="320" height="240"></canvas></td>
-          </tr>
-          <tr>
-          <td align="left"><input type="range" id="leftbottom" min="0" max="100" value="75" step="1" required></td>
-          <td align="right"><input type="range" id="rightbottom" min="0" max="100" value="75" step="1" required></td>
-          </tr>
-        </table>
-      </div>
-    </figure>
-        <section class="main">
-            <section id="buttons">
-                <table>
-                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">Начать видео </button></td></tr>
-                <tr>
-                  <td colspan="3">
-                    <table>
-                      <tbody>
-                        <tr> 
-                        <td colspan="2">
-                          Позиционирование объекта
-                          <select id="mark">
-                          <option value="center">Центр</option>               
-                          <option value="upper">Верхний</option>
-                          <option value="lower" selected="selected">Нижний</option>
-                          <option value="left">Левый</option>
-                          <option value="right">Правый</option>
-                          </select>
-                            Отслеживание объектов
-                         <div id="selectContainer">
-                           <!-- Здесь будет вставлен selectOptions -->
-                         </div>
-
-<!--
-                            <select id="object" onchange="count.innerHTML='';">
+static const char selectOptions[] PROGMEM = R"rawliteral(
+<select id="object" onchange="count.innerHTML='';">\
                               <option value="person" selected="selected">person</option>
                               <option value="bicycle">bicycle</option>
                               <option value="car">car</option>
@@ -483,7 +425,66 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                               <option value="teddy bear">teddy bear</option>
                               <option value="hair drier">hair drier</option>
                               <option value="toothbrush">toothbrush</option>
-                            </select> -->
+      </select>
+)rawliteral";
+
+//********************************************************************************************
+static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>ESP32-CAM Область предупреждения о распознавании объекта (горизонтальная область)</title>
+        <style>
+          body{font-family:Arial,Helvetica,sans-serif;background:#181818;color:#EFEFEF;font-size:16px}h2{font-size:18px}section.main{display:flex}#menu,section.main{flex-direction:column}#menu{display:none;flex-wrap:nowrap;min-width:340px;background:#363636;padding:8px;border-radius:4px;margin-top:-10px;margin-right:10px}#content{display:flex;flex-wrap:wrap;align-items:stretch}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}figure img{display:block;width:100%;height:auto;border-radius:4px;margin-top:8px}@media (min-width: 800px) and (orientation:landscape){#content{display:flex;flex-wrap:nowrap;align-items:stretch}figure img{display:block;max-width:100%;max-height:calc(100vh - 40px);width:auto;height:auto}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}}section#buttons{display:flex;flex-wrap:nowrap;justify-content:space-between}#nav-toggle{cursor:pointer;display:block}#nav-toggle-cb{outline:0;opacity:0;width:0;height:0}#nav-toggle-cb:checked+#menu{display:flex}.input-group{display:flex;flex-wrap:nowrap;line-height:22px;margin:5px 0}.input-group>label{display:inline-block;padding-right:10px;min-width:47%}.input-group input,.input-group select{flex-grow:1}.range-max,.range-min{display:inline-block;padding:0 5px}button{display:block;margin:5px;padding:0 12px;border:0;line-height:28px;cursor:pointer;color:#fff;background:#ff3034;border-radius:5px;font-size:16px;outline:0}button:hover{background:#ff494d}button:active{background:#f21c21}button.disabled{cursor:default;background:#a0a0a0}input[type=range]{-webkit-appearance:none;width:100%;height:22px;background:#363636;cursor:pointer;margin:0}input[type=range]:focus{outline:0}input[type=range]::-webkit-slider-runnable-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-webkit-slider-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;-webkit-appearance:none;margin-top:-11.5px}input[type=range]:focus::-webkit-slider-runnable-track{background:#EFEFEF}input[type=range]::-moz-range-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-moz-range-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer}input[type=range]::-ms-track{width:100%;height:2px;cursor:pointer;background:0 0;border-color:transparent;color:transparent}input[type=range]::-ms-fill-lower{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-fill-upper{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;height:2px}input[type=range]:focus::-ms-fill-lower{background:#EFEFEF}input[type=range]:focus::-ms-fill-upper{background:#363636}.switch{display:block;position:relative;line-height:22px;font-size:16px;height:22px}.switch input{outline:0;opacity:0;width:0;height:0}.slider{width:50px;height:22px;border-radius:22px;cursor:pointer;background-color:grey}.slider,.slider:before{display:inline-block;transition:.4s}.slider:before{position:relative;content:"";border-radius:50%;height:16px;width:16px;left:4px;top:3px;background-color:#fff}input:checked+.slider{background-color:#ff3034}input:checked+.slider:before{-webkit-transform:translateX(26px);transform:translateX(26px)}select{border:1px solid #363636;font-size:14px;height:22px;outline:0;border-radius:5px}.image-container{position:relative;min-width:160px}.close{position:absolute;right:5px;top:5px;background:#ff3034;width:16px;height:16px;border-radius:100px;color:#fff;text-align:center;line-height:18px;cursor:pointer}.hidden{display:none}
+        </style>
+        <script src="https:\/\/ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script src="https:\/\/cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"> </script>
+        <script src="https:\/\/cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.1.0"> </script>       
+    </head>
+    <body>
+    <figure>
+    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="Набор" onclick="start();">
+      <div id="stream-container" class="image-container hidden">
+        <div class="close" id="close-stream">×</div>
+        <img id="stream" src="" crossorigin="anonymous" style="background-color:#000000;display:none;">
+        <table>
+          <tr>
+          <td align="left"><input type="range" id="lefttop" min="0" max="100" value="25" step="1" required></td>
+          <td align="right"><input type="range" id="righttop" min="0" max="100" value="25" step="1" required></td>
+          </tr>
+          <tr>
+          <td colspan="2"><canvas id="canvas" width="320" height="240"></canvas></td>
+          </tr>
+          <tr>
+          <td align="left"><input type="range" id="leftbottom" min="0" max="100" value="75" step="1" required></td>
+          <td align="right"><input type="range" id="rightbottom" min="0" max="100" value="75" step="1" required></td>
+          </tr>
+        </table>
+      </div>
+    </figure>
+        <section class="main">
+            <section id="buttons">
+                <table>
+                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">Начать видео </button></td></tr>
+                <tr>
+                  <td colspan="3">
+                    <table>
+                      <tbody>
+                        <tr> 
+                        <td colspan="2">
+                          Позиционирование объекта
+                          <select id="mark">
+                          <option value="center">Центр</option>               
+                          <option value="upper">Верхний</option>
+                          <option value="lower" selected="selected">Нижний</option>
+                          <option value="left">Левый</option>
+                          <option value="right">Правый</option>
+                          </select>
+                            Отслеживание объектов
+                          <div id="selectContainer"></div>
+
                             <span id="count" style="color:red">0</span>
                         </td>             
                       </tr>
@@ -588,90 +589,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
     
         <script>
         var baseHost = "";
-        const selectOptions = `
-          <select id="object" onchange="count.innerHTML='';">
-                              <option value="person" selected="selected">person</option>
-                              <option value="bicycle">bicycle</option>
-                              <option value="car">car</option>
-                              <option value="motorcycle">motorcycle</option>
-                              <option value="airplane">airplane</option>
-                              <option value="bus">bus</option>
-                              <option value="train">train</option>
-                              <option value="truck">truck</option>
-                              <option value="boat">boat</option>
-                              <option value="traffic light">traffic light</option>
-                              <option value="fire hydrant">fire hydrant</option>
-                              <option value="stop sign">stop sign</option>
-                              <option value="parking meter">parking meter</option>
-                              <option value="bench">bench</option>
-                              <option value="bird">bird</option>
-                              <option value="cat">cat</option>
-                              <option value="dog">dog</option>
-                              <option value="horse">horse</option>
-                              <option value="sheep">sheep</option>
-                              <option value="cow">cow</option>
-                              <option value="elephant">elephant</option>
-                              <option value="bear">bear</option>
-                              <option value="zebra">zebra</option>
-                              <option value="giraffe">giraffe</option>
-                              <option value="backpack">backpack</option>
-                              <option value="umbrella">umbrella</option>
-                              <option value="handbag">handbag</option>
-                              <option value="tie">tie</option>
-                              <option value="suitcase">suitcase</option>
-                              <option value="frisbee">frisbee</option>
-                              <option value="skis">skis</option>
-                              <option value="snowboard">snowboard</option>
-                              <option value="sports ball">sports ball</option>
-                              <option value="kite">kite</option>
-                              <option value="baseball bat">baseball bat</option>
-                              <option value="baseball glove">baseball glove</option>
-                              <option value="skateboard">skateboard</option>
-                              <option value="surfboard">surfboard</option>
-                              <option value="tennis racket">tennis racket</option>
-                              <option value="bottle">bottle</option>
-                              <option value="wine glass">wine glass</option>
-                              <option value="cup">cup</option>
-                              <option value="fork">fork</option>
-                              <option value="knife">knife</option>
-                              <option value="spoon">spoon</option>
-                              <option value="bowl">bowl</option>
-                              <option value="banana">banana</option>
-                              <option value="apple">apple</option>
-                              <option value="sandwich">sandwich</option>
-                              <option value="orange">orange</option>
-                              <option value="broccoli">broccoli</option>
-                              <option value="carrot">carrot</option>
-                              <option value="hot dog">hot dog</option>
-                              <option value="pizza">pizza</option>
-                              <option value="donut">donut</option>
-                              <option value="cake">cake</option>
-                              <option value="chair">chair</option>
-                              <option value="couch">couch</option>
-                              <option value="potted plant">potted plant</option>
-                              <option value="bed">bed</option>
-                              <option value="dining table">dining table</option>
-                              <option value="toilet">toilet</option>
-                              <option value="tv">tv</option>
-                              <option value="laptop">laptop</option>
-                              <option value="mouse">mouse</option>
-                              <option value="remote">remote</option>
-                              <option value="keyboard">keyboard</option>
-                              <option value="cell phone">cell phone</option>
-                              <option value="microwave">microwave</option>
-                              <option value="oven">oven</option>
-                              <option value="toaster">toaster</option>
-                              <option value="sink">sink</option>
-                              <option value="refrigerator">refrigerator</option>
-                              <option value="book">book</option>
-                              <option value="clock">clock</option>
-                              <option value="vase">vase</option>
-                              <option value="scissors">scissors</option>
-                              <option value="teddy bear">teddy bear</option>
-                              <option value="hair drier">hair drier</option>
-                              <option value="toothbrush">toothbrush</option>
-                            </select>';
-
+        const selectOptions = FPSTR(selectOptions);
 
         function start() {
             baseHost = 'http:\/\/'+document.getElementById("ip").value;  //var baseHost = document.location.origin
@@ -704,6 +622,12 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
               if (updateRemote && initialValue !== value) {
                 updateConfig(el);
               } 
+            // Найти элемент, в который вы хотите вставить select
+            const selectContainer = document.getElementById("selectContainer");
+
+            // Вставить selectOptions внутрь selectContainer
+            selectContainer.innerHTML = selectOptions;
+
             }
             function updateConfig (el) {
               let value
@@ -755,12 +679,6 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
             const stillButton = document.getElementById('get-still')
             const streamButton = document.getElementById('toggle-stream')
             const closeButton = document.getElementById('close-stream')
-
-            // Найти элемент, в который вы хотите вставить select
-            const selectContainer = document.getElementById("selectContainer");
-
-            // Вставить selectOptions внутрь selectContainer
-            selectContainer.innerHTML = selectOptions;
 
             const stopStream = () => {
               //window.stop();
