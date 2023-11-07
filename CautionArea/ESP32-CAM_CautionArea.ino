@@ -671,11 +671,6 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                               <option value="hair drier">hair drier</option>
                               <option value="toothbrush">toothbrush</option>
                             </select>';
-          // Найти элемент, в который вы хотите вставить select
-             const selectContainer = document.getElementById("selectContainer");
-
-         // Вставить selectOptions внутрь selectContainer
-            selectContainer.innerHTML = selectOptions;
 
 
         function start() {
@@ -760,6 +755,13 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
             const stillButton = document.getElementById('get-still')
             const streamButton = document.getElementById('toggle-stream')
             const closeButton = document.getElementById('close-stream')
+
+            // Найти элемент, в который вы хотите вставить select
+            const selectContainer = document.getElementById("selectContainer");
+
+            // Вставить selectOptions внутрь selectContainer
+            selectContainer.innerHTML = selectOptions;
+
             const stopStream = () => {
               //window.stop();
               streamButton.innerHTML = 'Start Stream'
