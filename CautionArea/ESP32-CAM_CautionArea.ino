@@ -2211,12 +2211,12 @@ static esp_err_t stream_handler(httpd_req_t *req){
     return res;
 }
 
-//指令參數控制
+//Управление командными параметрами
 static esp_err_t cmd_handler(httpd_req_t *req){
-    char*  buf;    //存取URL-адрес後帶的參數字串
+    char*  buf;    //доступ URL-адрес cтрока параметра, за которой следует
     size_t buf_len;
-    char variable[128] = {0,};  //存取參數var值
-    char value[128] = {0,};     //存取參數val值
+    char variable[128] = {0,};  //доступ  параметр var значение 
+    char value[128] = {0,};     //доступ  параметр val значение 
     String myCmd = "";
 
     buf_len = httpd_req_get_url_query_len(req) + 1;
@@ -2231,7 +2231,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
             httpd_query_key_value(buf, "val", value, sizeof(value)) == ESP_OK) {
           } 
           else {
-            myCmd = String(buf);   //如果非官方格式不含var, val，則為Пользовательский формат команды
+            myCmd = String(buf);   //Если неофициальный формат не содержит var, val，тогда это Пользовательский формат команды
           }
         }
         free(buf);
@@ -2243,9 +2243,9 @@ static esp_err_t cmd_handler(httpd_req_t *req){
     Feedback="";Command="";cmd="";P1="";P2="";P3="";P4="";P5="";P6="";P7="";P8="";P9="";
     ReceiveState=0,cmdState=1,strState=1,questionstate=0,equalstate=0,semicolonstate=0;     
     if (myCmd.length()>0) {
-      myCmd = "?"+myCmd;  //URL-адрес後帶的參數字串轉換成Пользовательский формат команды
+      myCmd = "?"+myCmd;  //URL-адрес cтрока параметра, за которой следует преобразовать в Пользовательский формат команды
       for (int i=0;i<myCmd.length();i++) {
-        getCommand(char(myCmd.charAt(i)));  //拆解自訂指令參數字串
+        getCommand(char(myCmd.charAt(i)));  //разбирать пользовательские инструкции параметр строка
       }
     }
 
@@ -2255,10 +2255,10 @@ static esp_err_t cmd_handler(httpd_req_t *req){
       Serial.println("cmd= "+cmd+" ,P1= "+P1+" ,P2= "+P2+" ,P3= "+P3+" ,P4= "+P4+" ,P5= "+P5+" ,P6= "+P6+" ,P7= "+P7+" ,P8= "+P8+" ,P9= "+P9);
       Serial.println(""); 
 
-      //自訂指令區塊  http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9
+      //Пользовательский командный блок  http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9
       if (cmd=="your cmd") {
         // You can do anything
-        // Feedback="<font color=\"red\">Hello World</font>";   //可為一般文字或HTML語法
+        // Feedback="<font color=\"red\">Hello World</font>";   //Может быть общий текст или синтаксис HTML
       }
       else if (cmd=="ip") {  //查詢APIP, STAIP
         Feedback="AP IP: "+WiFi.softAPIP().toString();    
@@ -2392,7 +2392,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
         const char *resp = Feedback.c_str();
         httpd_resp_set_type(req, "text/html");
         httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
-        return httpd_resp_send(req, resp, strlen(resp));  //回傳參數字串
+        return httpd_resp_send(req, resp, strlen(resp));  //回傳 параметр строка
       }
       else {
         httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
@@ -2409,7 +2409,7 @@ void tone(int pin, int frequency, int duration) {
   ledcWriteTone(9, 0);
 }
 
-//顯示Видео 參數狀態(須回傳json格式載入初始Набор)
+//顯示Видео  параметр 狀態(須回傳json格式載入初始Набор)
 static esp_err_t status_handler(httpd_req_t *req){
     static char json_response[1024];
 
@@ -2522,7 +2522,7 @@ void startCameraServer(){
   }
 }
 
-//自訂指令拆解參數字串置入變數
+//自訂指令拆解 параметр строка置入變數
 void getCommand(char c)
 {
   if (c=='?') ReceiveState=1;
