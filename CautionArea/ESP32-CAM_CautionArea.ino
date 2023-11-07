@@ -48,20 +48,20 @@ https://taira-komori.jpn.org/freesoundtw.html
 https://mp3cut.net/tw/
 */
 
-//AP 連線帳號密碼 (首頁網址 http://192.168.4.1)
-const char* apssid = "Classroom01";          //不同台可設不同流水號區別
-const char* appassword = "12345678";         //AP密碼至少要8個字元以上
+//AP Пароль учетной записи для подключения (url домашней страницы http://192.168.4.1)
+const char* apssid = "Classroom01";          //Разные станции могут/должны устанавливать разные серийные номера для различения между собой
+const char* appassword = "12345678";         //AP Пароль должен содержать не менее 8 символов
 
-String LineToken = "cGv0FDV01aGR9b2W0gH7zmdOnuOv8gusHATO1FGpyOW";  //傳送區域網路IP至Line通知(用不到可不填)
+String LineToken = "cGv0FDV01aGR9b2W0gH7zmdOnuOv8gusHATO1FGpyOW";  //Отправить уведомление с IP-адреса локальной сети на линию (вы не можете заполнить поле, если оно вам не нужно)
 
-int Buzzer = 2;  //蜂鳴器腳位： IO2
+int Buzzer = 2;  //Пин зуммера： IO2
 
 #include <WiFi.h>
 #include <HTTPClient.h>
 HTTPClient http;
-#include "esp_camera.h"          //視訊函式
-#include "soc/soc.h"             //用於電源不穩不重開機 
-#include "soc/rtc_cntl_reg.h"    //用於電源不穩不重開機
+#include "esp_camera.h"          //Функция видеосъемки
+#include "soc/soc.h"             //Используется при нестабильной подаче питания без перезапуска 
+#include "soc/rtc_cntl_reg.h"    //Используется при нестабильной подаче питания без перезапуска
 
 //https://github.com/espressif/arduino-esp32/blob/master/libraries/Preferences/src/Preferences.h
 #include <Preferences.h>
@@ -70,14 +70,14 @@ Preferences preferences;
 String wifi_ssid ="";
 String wifi_password ="";
 
-//官方函式庫
+//Официальная библиотека
 #include "esp_http_server.h"
 #include "esp_camera.h"
 #include "img_converters.h"
 
-String Feedback="";   //自訂指令回傳客戶端訊息
+String Feedback="";   //Пользовательские инструкции для возврата клиентских сообщений
 
-//自訂指令參數值
+//Значения пользовательских командных параметров
 String Command="";
 String cmd="";
 String P1="";
@@ -90,7 +90,7 @@ String P7="";
 String P8="";
 String P9="";
 
-//自訂指令拆解狀態值
+//Настройте значение статуса разборки для команды
 byte ReceiveState=0;
 byte cmdState=1;
 byte strState=1;
@@ -111,7 +111,7 @@ static const char* _STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %
 httpd_handle_t stream_httpd = NULL;
 httpd_handle_t camera_httpd = NULL;
 
-//ESP32-CAM 安信可模組腳位設定
+//ESP32-CA MНастройка вывода модуля камеры (должны быть настройки для AI Thinker или иного используемого)
 #define PWDN_GPIO_NUM     32
 #define RESET_GPIO_NUM    -1
 #define XCLK_GPIO_NUM      0
@@ -131,13 +131,13 @@ httpd_handle_t camera_httpd = NULL;
 #define PCLK_GPIO_NUM     22
 
 void setup() {
-  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);  //關閉電源不穩就重開機的設定
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);  //Настройка для выключения питания и перезапуска при нестабильном питании
   
   Serial.begin(115200);
-  Serial.setDebugOutput(true);  //開啟診斷輸出
+  Serial.setDebugOutput(true);  //Включение отладочного вывода
   Serial.println();
 
-  //視訊組態設定  https://github.com/espressif/esp32-camera/blob/master/driver/include/esp_camera.h
+  //Настройки конфигурации видео  https://github.com/espressif/esp32-camera/blob/master/driver/include/esp_camera.h
   camera_config_t config;
   config.ledc_channel = LEDC_CHANNEL_0;
   config.ledc_timer = LEDC_TIMER_0;
