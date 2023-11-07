@@ -12,24 +12,24 @@ http://192.168.xxx.xxx/capture     //Получить статичное изо�
 http://192.168.xxx.xxx/status      //Получение значений видеопараметров
 http://192.168.xxx.xxx/wifi        //Установите пароль учетной записи Wi-Fi в локальной сети 
  
-自訂指令格式 :  
+Пользовательский формат команды :  
 http://APIP/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9
 http://STAIP/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9
 
-預設AP端IP： 192.168.4.1
-自訂指令格式 http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9
-http://192.168.xxx.xxx/control?ip                      //取得APIP, STAIP
-http://192.168.xxx.xxx/control?mac                     //取得MAC位址
-http://192.168.xxx.xxx/control?restart                 //重啟ESP32-CAM
-http://192.168.xxx.xxx/control?digitalwrite=pin;value  //數位輸出
-http://192.168.xxx.xxx/control?analogwrite=pin;value   //類比輸出
-http://192.168.xxx.xxx/control?digitalread=pin         //數位讀取
-http://192.168.xxx.xxx/control?analogread=pin          //類比讀取
-http://192.168.xxx.xxx/control?touchread=pin           //觸碰讀取
-http://192.168.xxx.xxx/control?flash=value             //內建閃光燈 value= 0~255
-http://192.168.xxx.xxx/control?buzzer                  //蜂鳴器(IO2)鳴叫
+Предустановленный AP IP： 192.168.4.1
+Пользовательский формат команды http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9
+http://192.168.xxx.xxx/control?ip                      //получить APIP, STAIP
+http://192.168.xxx.xxx/control?mac                     //Получить MAC-адрес
+http://192.168.xxx.xxx/control?restart                 //Перезапустить ESP32-CAM
+http://192.168.xxx.xxx/control?digitalwrite=pin;value  //Цифровой выход
+http://192.168.xxx.xxx/control?analogwrite=pin;value   //Аналоговый выход
+http://192.168.xxx.xxx/control?digitalread=pin         //Цифровой вход
+http://192.168.xxx.xxx/control?analogread=pin          //Аналоговый вход
+http://192.168.xxx.xxx/control?touchread=pin           //Сенсор касания (тачсенсор)
+http://192.168.xxx.xxx/control?flash=value             //Подсветка value= 0~255
+http://192.168.xxx.xxx/control?buzzer                  //Пищалка(IO2)буззер
 
-官方指令格式 http://192.168.xxx.xxx/control?var=***&val=***
+Формат адресов сервисов http://192.168.xxx.xxx/control?var=***&val=***
 http://192.168.xxx.xxx/control?var=framesize&val=value    // value = 10->UXGA(1600x1200), 9->SXGA(1280x1024), 8->XGA(1024x768) ,7->SVGA(800x600), 6->VGA(640x480), 5 selected=selected->CIF(400x296), 4->QVGA(320x240), 3->HQVGA(240x176), 0->QQVGA(160x120)
 http://192.168.xxx.xxx/control?var=quality&val=value      // value = 10 ~ 63
 http://192.168.xxx.xxx/control?var=brightness&val=value   // value = -2 ~ 2
@@ -38,13 +38,13 @@ http://192.168.xxx.xxx/control?var=hmirror&val=value      // value = 0 or 1
 http://192.168.xxx.xxx/control?var=vflip&val=value        // value = 0 or 1 
 http://192.168.xxx.xxx/control?var=flash&val=value        // value = 0 ~ 255 
       
-查詢Client端IP：
-查詢IP：http://192.168.4.1/?ip
+Client IP：
+ЗапросIP：http://192.168.4.1/?ip
 
-音效下載
+Загрузка звука
 https://taira-komori.jpn.org/freesoundtw.html
 
-線上音效剪輯 (將音效剪輯長度成0.2秒再使用)
+Онлайн-редактирование звука (увеличьте время редактирования звука до 0,2 секунды, а затем используйте его снова)
 https://mp3cut.net/tw/
 */
 
