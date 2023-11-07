@@ -381,14 +381,14 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
         <section class="main">
             <section id="buttons">
                 <table>
-                <tr><td><button id="restartButton">重啟電源</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">啟動視訊</button></td></tr>
+                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">啟動Видео </button></td></tr>
                 <tr>
                   <td colspan="3">
                     <table>
                       <tbody>
                         <tr> 
                         <td colspan="2">
-                          物件定位
+                          Позиционирование объекта
                           <select id="mark">
                           <option value="center">中</option>               
                           <option value="upper">上</option>
@@ -396,7 +396,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                           <option value="left">左</option>
                           <option value="right">右</option>
                           </select>
-                            物件追蹤
+                            Отслеживание объектов
                             <select id="object" onchange="count.innerHTML='';">
                               <option value="person" selected="selected">person</option>
                               <option value="bicycle">bicycle</option>
@@ -484,7 +484,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                       </tr>
                       <tr> 
                         <td>
-                          分數下限
+                          Нижний предел оценки
                           <select id="score">
                           <option value="1.0">1</option>
                           <option value="0.9">0.9</option>
@@ -500,12 +500,12 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                           </select>
                         </td>
                         <td>
-                        <input id="complementary" type="checkbox">區域反向偵測
+                        <input id="complementary" type="checkbox">Обнаружение обратной зоны
                         </td>           
                       </tr>             
-                      <tr><td><input type="checkbox" id="chkAud">警示音效(mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
-                      <tr><td><input type="checkbox" id="chkBuzzer">蜂鳴器(IO2)</td><td></td></tr>
-                      <tr><td colspan="2"><input type="checkbox" id="chkLine">Line通知權杖<input type="text" id="token" size="10" value=""><input type="button" value="傳送影像" onclick="SendCapturedImage();"></td></tr> 
+                      <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук(mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
+                      <tr><td><input type="checkbox" id="chkBuzzer">Зуммер(IO2)</td><td></td></tr>
+                      <tr><td colspan="2"><input type="checkbox" id="chkLine">Скипетр линейного уведомления<input type="text" id="token" size="10" value=""><input type="button" value="Передача изображения" onclick="SendCapturedImage();"></td></tr> 
                       <tr><td colspan="2"><span id="message" style="display:none"></span></td><td></td></tr> 
                     </tbody></table> 
                   </td>
@@ -513,20 +513,20 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                 </tbody></table>
             </section>         
             <div id="logo">
-                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;視訊Набор</label>
+                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;Видео Набор</label>
             </div>
             <div id="content">
                 <div id="sidebar">
                     <input type="checkbox" id="nav-toggle-cb">
                     <nav id="menu">
                         <div class="input-group" id="flash-group">
-                            <label for="flash">閃光燈</label>
+                            <label for="flash">Вспышка</label>
                             <div class="range-min">0</div>
                             <input type="range" id="flash" min="0" max="255" value="0" class="default-action">
                             <div class="range-max">255</div>
                         </div>
                         <div class="input-group" id="framesize-group">
-                            <label for="framesize">解析度</label>
+                            <label for="framesize">разрешение</label>
                             <select id="framesize" class="default-action">
                                 <option value="10">UXGA(1600x1200)</option>
                                 <option value="9">SXGA(1280x1024)</option>
@@ -540,25 +540,25 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                             </select>
                         </div>
                         <div class="input-group" id="quality-group">
-                            <label for="quality">畫質</label>
+                            <label for="quality">Качество изображения</label>
                             <div class="range-min">10</div>
                             <input type="range" id="quality" min="10" max="63" value="10" class="default-action">
                             <div class="range-max">63</div>
                         </div>
                         <div class="input-group" id="brightness-group">
-                            <label for="brightness">亮度</label>
+                            <label for="brightness">Яркость</label>
                             <div class="range-min">-2</div>
                             <input type="range" id="brightness" min="-2" max="2" value="0" class="default-action">
                             <div class="range-max">2</div>
                         </div>
                         <div class="input-group" id="contrast-group">
-                            <label for="contrast">對比</label>
+                            <label for="contrast">Контраст</label>
                             <div class="range-min">-2</div>
                             <input type="range" id="contrast" min="-2" max="2" value="0" class="default-action">
                             <div class="range-max">2</div>
                         </div>
                         <div class="input-group" id="hmirror-group">
-                            <label for="hmirror">鏡像</label>
+                            <label for="hmirror">Зеркальное отражение</label>
                             <div class="switch">
                                 <input id="hmirror" type="checkbox" class="default-action" checked>
                                 <label class="slider" for="hmirror"></label>
@@ -570,7 +570,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
         </section>
         <iframe id="ifr" style="display:none;position:absolute" src=""></iframe>
         <div id="position" style="display:none;color:blue;font-size:40px"></div>
-        <div id="result" style="color:red">正在載入物件辨識模型...</div>   
+        <div id="result" style="color:red">Загрузка модели распознавания объектов...</div>   
         
         <div style="display:none">
         <form id="myForm" action="https:\/\/script.google.com/macros/s/AKfycbyp1xvWg-UCSrLsL8zt-ba_0n96uNTpAFyRry9ifCnRbtK-vgg/exec" method="post" target="sendcapturedimage">
@@ -675,7 +675,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
               streamButton.innerHTML = 'Stop Stream'
             }
             
-            //新增重啟電源按鈕點選事件 (自訂指令格式：http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9)
+            //Добавь Сснова включите питание событие нажатия кнопки (Пользовательский формат команды：http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9)
             restartButton.onclick = () => {
               fetch(baseHost+"/control?restart");
             } 
@@ -751,7 +751,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
             cocoSsd.load().then(cocoSsd_Model => {
               Model = cocoSsd_Model;
               getStill.style.display = "block";
-              result.innerHTML = "請點選啟動視訊";
+              result.innerHTML = "Пожалуйста, нажмите кнопку Запуск видео ";
             }); 
           }
           
@@ -773,7 +773,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
             context.drawImage(ShowImage,0,0,ShowImage.width,ShowImage.height); 
                        
             Model.detect(canvas).then(Predictions => {    
-              var objectCount=0;  //紀錄偵測到物件總數
+              var objectCount=0;  //Счётчик общего количества обнаруженных объектов
               context.strokeStyle = 'yellow';
               context.lineWidth = 5;    
               context.beginPath();
@@ -990,14 +990,14 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
         <section class="main">
             <section id="buttons">
                 <table>
-                <tr><td><button id="restartButton">重啟電源</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">啟動視訊</button></td></tr>
+                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">啟動Видео </button></td></tr>
                 <tr>
                   <td colspan="3">
                     <table>
                       <tbody>
                       <tr> 
                         <td colspan="2">
-                          物件定位
+                          Позиционирование объекта
                           <select id="mark">
                           <option value="center">中</option>               
                           <option value="upper">上</option>
@@ -1005,7 +1005,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
                           <option value="left">左</option>
                           <option value="right">右</option>
                           </select>
-                            物件追蹤
+                            Отслеживание объектов
                             <select id="object" onchange="count.innerHTML='';">
                               <option value="person" selected="selected">person</option>
                               <option value="bicycle">bicycle</option>
@@ -1093,7 +1093,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
                       </tr>
                       <tr> 
                         <td>
-                          分數下限
+                          Нижний предел оценки
                           <select id="score">
                           <option value="1.0">1</option>
                           <option value="0.9">0.9</option>
@@ -1109,12 +1109,12 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
                           </select>
                         </td>
                         <td>
-                        <input id="complementary" type="checkbox">區域反向偵測
+                        <input id="complementary" type="checkbox">Обнаружение обратной зоны
                         </td>           
                       </tr>          
-                      <tr><td><input type="checkbox" id="chkAud">警示音效(mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
-                      <tr><td><input type="checkbox" id="chkBuzzer">蜂鳴器(IO2)</td><td></td></tr>
-                      <tr><td colspan="2"><input type="checkbox" id="chkLine">Line通知權杖<input type="text" id="token" size="10" value=""><input type="button" value="傳送影像" onclick="SendCapturedImage();"></td></tr> 
+                      <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук(mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
+                      <tr><td><input type="checkbox" id="chkBuzzer">Зуммер(IO2)</td><td></td></tr>
+                      <tr><td colspan="2"><input type="checkbox" id="chkLine">Скипетр линейного уведомления<input type="text" id="token" size="10" value=""><input type="button" value="Передача изображения" onclick="SendCapturedImage();"></td></tr> 
                       <tr><td colspan="2"><span id="message" style="display:none"></span></td><td></td></tr> 
                     </tbody></table> 
                   </td>
@@ -1122,20 +1122,20 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
                 </tbody></table>
             </section>         
             <div id="logo">
-                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;視訊Набор</label>
+                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;Видео Набор</label>
             </div>
             <div id="content">
                 <div id="sidebar">
                     <input type="checkbox" id="nav-toggle-cb">
                     <nav id="menu">
                         <div class="input-group" id="flash-group">
-                            <label for="flash">閃光燈</label>
+                            <label for="flash">Вспышка</label>
                             <div class="range-min">0</div>
                             <input type="range" id="flash" min="0" max="255" value="0" class="default-action">
                             <div class="range-max">255</div>
                         </div>
                         <div class="input-group" id="framesize-group">
-                            <label for="framesize">解析度</label>
+                            <label for="framesize">разрешение</label>
                             <select id="framesize" class="default-action">
                                 <option value="10">UXGA(1600x1200)</option>
                                 <option value="9">SXGA(1280x1024)</option>
@@ -1149,25 +1149,25 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
                             </select>
                         </div>
                         <div class="input-group" id="quality-group">
-                            <label for="quality">畫質</label>
+                            <label for="quality">Качество изображения</label>
                             <div class="range-min">10</div>
                             <input type="range" id="quality" min="10" max="63" value="10" class="default-action">
                             <div class="range-max">63</div>
                         </div>
                         <div class="input-group" id="brightness-group">
-                            <label for="brightness">亮度</label>
+                            <label for="brightness">Яркость</label>
                             <div class="range-min">-2</div>
                             <input type="range" id="brightness" min="-2" max="2" value="0" class="default-action">
                             <div class="range-max">2</div>
                         </div>
                         <div class="input-group" id="contrast-group">
-                            <label for="contrast">對比</label>
+                            <label for="contrast">Контраст</label>
                             <div class="range-min">-2</div>
                             <input type="range" id="contrast" min="-2" max="2" value="0" class="default-action">
                             <div class="range-max">2</div>
                         </div>
                         <div class="input-group" id="hmirror-group">
-                            <label for="hmirror">鏡像</label>
+                            <label for="hmirror">Зеркальное отражение</label>
                             <div class="switch">
                                 <input id="hmirror" type="checkbox" class="default-action" checked>
                                 <label class="slider" for="hmirror"></label>
@@ -1179,7 +1179,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
         </section>
         <iframe id="ifr" style="display:none;position:absolute" src=""></iframe>
         <div id="position" style="display:none;color:blue;font-size:40px"></div>
-        <div id="result" style="color:red">正在載入物件辨識模型...</div> 
+        <div id="result" style="color:red">Загрузка модели распознавания объектов...</div> 
     
         <div style="display:none">
         <form id="myForm" action="https:\/\/script.google.com/macros/s/AKfycbyp1xvWg-UCSrLsL8zt-ba_0n96uNTpAFyRry9ifCnRbtK-vgg/exec" method="post" target="sendcapturedimage">
@@ -1284,7 +1284,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
               streamButton.innerHTML = 'Stop Stream'
             }
             
-            //新增重啟電源按鈕點選事件 (自訂指令格式：http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9)
+            //Добавь Снова включите питание событие нажатия кнопки (Пользовательский формат команды：http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9)
             restartButton.onclick = () => {
               fetch(baseHost+"/control?restart");
             } 
@@ -1358,7 +1358,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
             cocoSsd.load().then(cocoSsd_Model => {
               Model = cocoSsd_Model;
               getStill.style.display = "block";
-              result.innerHTML = "請點選啟動視訊";
+              result.innerHTML = "Пожалуйста, нажмите кнопку Запуск Видео ";
             }); 
           }
           
@@ -1380,7 +1380,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
             context.drawImage(ShowImage,0,0,ShowImage.width,ShowImage.height); 
                        
             Model.detect(canvas).then(Predictions => {    
-              var objectCount=0;  //紀錄偵測到物件總數
+              var objectCount=0;  //Запишите общее количество обнаруженных объектов
               context.strokeStyle = 'yellow';
               context.lineWidth = 5;    
               context.beginPath();
@@ -1562,14 +1562,14 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
         <section class="main">
             <section id="buttons">
                 <table>
-                <tr><td><button id="restartButton">重啟電源</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">啟動視訊</button></td></tr>
+                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">啟動Видео </button></td></tr>
                 <tr>
                   <td colspan="3">
                     <table>
                       <tbody>
                       <tr> 
                         <td colspan="2">
-                          物件定位
+                          Позиционирование объекта
                           <select id="mark">
                           <option value="center">中</option>               
                           <option value="upper">上</option>
@@ -1577,7 +1577,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
                           <option value="left">左</option>
                           <option value="right">右</option>
                           </select>
-                            物件追蹤
+                            Отслеживание объектов
                             <select id="object" onchange="count.innerHTML='';">
                               <option value="person" selected="selected">person</option>
                               <option value="bicycle">bicycle</option>
@@ -1665,7 +1665,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
                       </tr>
                       <tr> 
                         <td>
-                          分數下限
+                          Нижний предел оценки
                           <select id="score">
                           <option value="1.0">1</option>
                           <option value="0.9">0.9</option>
@@ -1681,12 +1681,12 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
                           </select>
                         </td>
                         <td>
-                          <input id="complementary" type="checkbox">區域反向偵測
+                          <input id="complementary" type="checkbox">Обнаружение обратной зоны
                         </td>
                       </tr>         
-                      <tr><td><input type="checkbox" id="chkAud">警示音效(mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
-                      <tr><td><input type="checkbox" id="chkBuzzer">蜂鳴器(IO2)</td><td></td></tr>
-                      <tr><td colspan="2"><input type="checkbox" id="chkLine">Line通知權杖<input type="text" id="token" size="10" value=""><input type="button" value="傳送影像" onclick="SendCapturedImage();"></td></tr> 
+                      <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук(mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
+                      <tr><td><input type="checkbox" id="chkBuzzer">Зуммер(IO2)</td><td></td></tr>
+                      <tr><td colspan="2"><input type="checkbox" id="chkLine">Скипетр линейного уведомления<input type="text" id="token" size="10" value=""><input type="button" value="Передача изображения" onclick="SendCapturedImage();"></td></tr> 
                       <tr><td colspan="2"><span id="message" style="display:none"></span></td><td></td></tr> 
                     </tbody></table> 
                   </td>
@@ -1694,20 +1694,20 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
                 </tbody></table>
             </section>         
             <div id="logo">
-                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;視訊Набор</label>
+                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;Видео Набор</label>
             </div>
             <div id="content">
                 <div id="sidebar">
                     <input type="checkbox" id="nav-toggle-cb">
                     <nav id="menu">
                         <div class="input-group" id="flash-group">
-                            <label for="flash">閃光燈</label>
+                            <label for="flash">Вспышка</label>
                             <div class="range-min">0</div>
                             <input type="range" id="flash" min="0" max="255" value="0" class="default-action">
                             <div class="range-max">255</div>
                         </div>
                         <div class="input-group" id="framesize-group">
-                            <label for="framesize">解析度</label>
+                            <label for="framesize">разрешение</label>
                             <select id="framesize" class="default-action">
                                 <option value="10">UXGA(1600x1200)</option>
                                 <option value="9">SXGA(1280x1024)</option>
@@ -1721,25 +1721,25 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
                             </select>
                         </div>
                         <div class="input-group" id="quality-group">
-                            <label for="quality">畫質</label>
+                            <label for="quality">Качество изображения</label>
                             <div class="range-min">10</div>
                             <input type="range" id="quality" min="10" max="63" value="10" class="default-action">
                             <div class="range-max">63</div>
                         </div>
                         <div class="input-group" id="brightness-group">
-                            <label for="brightness">亮度</label>
+                            <label for="brightness">Яркость</label>
                             <div class="range-min">-2</div>
                             <input type="range" id="brightness" min="-2" max="2" value="0" class="default-action">
                             <div class="range-max">2</div>
                         </div>
                         <div class="input-group" id="contrast-group">
-                            <label for="contrast">對比</label>
+                            <label for="contrast">Контраст</label>
                             <div class="range-min">-2</div>
                             <input type="range" id="contrast" min="-2" max="2" value="0" class="default-action">
                             <div class="range-max">2</div>
                         </div>
                         <div class="input-group" id="hmirror-group">
-                            <label for="hmirror">鏡像</label>
+                            <label for="hmirror">Зеркальное отражение</label>
                             <div class="switch">
                                 <input id="hmirror" type="checkbox" class="default-action" checked>
                                 <label class="slider" for="hmirror"></label>
@@ -1751,7 +1751,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
         </section>
         <iframe id="ifr" style="display:none;position:absolute" src=""></iframe>
         <div id="position" style="display:none;color:blue;font-size:40px"></div>
-        <div id="result" style="color:red">正在載入物件辨識模型...</div> 
+        <div id="result" style="color:red">Загрузка модели распознавания объектов...</div> 
     
         <div style="display:none">
         <form id="myForm" action="https:\/\/script.google.com/macros/s/AKfycbyp1xvWg-UCSrLsL8zt-ba_0n96uNTpAFyRry9ifCnRbtK-vgg/exec" method="post" target="sendcapturedimage">
@@ -1855,7 +1855,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
               streamButton.innerHTML = 'Stop Stream'
             }
 
-            //新增重啟電源按鈕點選事件 (自訂指令格式：http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9)
+            //Добавь Снова включите питание событие нажатия кнопки (Пользовательский формат команды：http://192.168.xxx.xxx/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9)
             restartButton.onclick = () => {
               fetch(baseHost+"/control?restart");
             } 
@@ -1971,7 +1971,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
             cocoSsd.load().then(cocoSsd_Model => {
               Model = cocoSsd_Model;
               getStill.style.display = "block";
-              result.innerHTML = "請點選啟動視訊";
+              result.innerHTML = "Пожалуйста, нажмите кнопку Запуск Видео ";
             }); 
           }
           
@@ -2001,7 +2001,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
             }  
           
             Model.detect(canvas).then(Predictions => {    
-              var objectCount=0;  //紀錄偵測到物件總數
+              var objectCount=0;  //Запишите общее количество обнаруженных объектов
     
               //console.log('Predictions: ', Predictions);
               if (Predictions.length>0) {
@@ -2231,7 +2231,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
             httpd_query_key_value(buf, "val", value, sizeof(value)) == ESP_OK) {
           } 
           else {
-            myCmd = String(buf);   //如果非官方格式不含var, val，則為自訂指令格式
+            myCmd = String(buf);   //如果非官方格式不含var, val，則為Пользовательский формат команды
           }
         }
         free(buf);
@@ -2243,7 +2243,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
     Feedback="";Command="";cmd="";P1="";P2="";P3="";P4="";P5="";P6="";P7="";P8="";P9="";
     ReceiveState=0,cmdState=1,strState=1,questionstate=0,equalstate=0,semicolonstate=0;     
     if (myCmd.length()>0) {
-      myCmd = "?"+myCmd;  //網址後帶的參數字串轉換成自訂指令格式
+      myCmd = "?"+myCmd;  //網址後帶的參數字串轉換成Пользовательский формат команды
       for (int i=0;i<myCmd.length();i++) {
         getCommand(char(myCmd.charAt(i)));  //拆解自訂指令參數字串
       }
@@ -2297,7 +2297,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
       else if (cmd=="touchread") {
         Feedback=String(touchRead(P1.toInt()));
       }   
-      else if (cmd=="flash") {  //控制內建閃光燈
+      else if (cmd=="flash") {  //控制內建Вспышка
         ledcAttachPin(4, 4);  
         ledcSetup(4, 5000, 8);   
         int val = P1.toInt();
@@ -2326,7 +2326,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
   
           if (WiFi.status() == WL_CONNECTED) {
             WiFi.softAP((WiFi.localIP().toString()+"_"+P1).c_str(), P2.c_str());
-            for (int i=0;i<2;i++) {    //若連不上WIFIНабор閃光燈慢速閃爍
+            for (int i=0;i<2;i++) {    //若連不上WIFIНаборВспышка慢速閃爍
               ledcWrite(4,10);
               delay(300);
               ledcWrite(4,0);
@@ -2374,7 +2374,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
       else if(!strcmp(variable, "brightness")) res = s->set_brightness(s, val);
       else if(!strcmp(variable, "hmirror")) res = s->set_hmirror(s, val);
       else if(!strcmp(variable, "vflip")) res = s->set_vflip(s, val);
-      else if(!strcmp(variable, "flash")) {  //自訂閃光燈指令
+      else if(!strcmp(variable, "flash")) {  //自訂Вспышка指令
         ledcAttachPin(4, 4);  
         ledcSetup(4, 5000, 8);        
         ledcWrite(4,val);
@@ -2409,7 +2409,7 @@ void tone(int pin, int frequency, int duration) {
   ledcWriteTone(9, 0);
 }
 
-//顯示視訊參數狀態(須回傳json格式載入初始Набор)
+//顯示Видео 參數狀態(須回傳json格式載入初始Набор)
 static esp_err_t status_handler(httpd_req_t *req){
     static char json_response[1024];
 
