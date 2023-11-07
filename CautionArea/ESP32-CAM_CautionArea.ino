@@ -306,17 +306,17 @@ static const char PROGMEM index_html[] = R"rawliteral(
       </head>
       <body>
       <button onclick="location.href='/wifi';">Настройка Wi-Fi</button>
-      <button onclick="location.href='/HorizontalLine';">水平警示區</button>
-      <button onclick="location.href='/VerticalLine';">垂直警示區</button>
-      <button onclick="location.href='/Rect';">框選警示區</button>
+      <button onclick="location.href='/HorizontalLine';">Горизонтальная буферная зона</button>
+      <button onclick="location.href='/VerticalLine';">Вертикальная буферная зона</button>
+      <button onclick="location.href='/Rect';">Прямоугольная буферная зона</button>
       </body>
   </html>        
 )rawliteral";
 
-//網頁首頁   http://192.168.xxx.xxx
+//Домашняя страница   http://192.168.xxx.xxx
 static esp_err_t index_handler(httpd_req_t *req){
-  httpd_resp_set_type(req, "text/html");  //設定回傳資料格式
-  httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");  //允許跨網域讀取
+  httpd_resp_set_type(req, "text/html");  //Установите формат возвращаемых данных
+  httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");  //Разрешить междоменное чтение
   return httpd_resp_send(req, (const char *)index_html, strlen(index_html));
 }
 
@@ -331,7 +331,7 @@ static const char index_wifi_html[] PROGMEM = R"rawliteral(
       <body>
       WIFI SSID: <input type="text" id="ssid"><br>
       WIFI  PWD: <input type="text" id="pwd"><br>
-      <input type="button" value="設定" onclick="location.href='/control?resetwifi='+document.getElementById('ssid').value+';'+document.getElementById('pwd').value;">
+      <input type="button" value="Набор" onclick="location.href='/control?resetwifi='+document.getElementById('ssid').value+';'+document.getElementById('pwd').value;">
       </body>
   </html>        
 )rawliteral";
@@ -342,14 +342,14 @@ static esp_err_t index_wifi_handler(httpd_req_t *req) {
   httpd_resp_send(req, (const char *)index_wifi_html, strlen(index_wifi_html));
   return ESP_OK;
 }
-
+//********************************************************************************************
 static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE html>
 <html>
   <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>ESP32-CAM 物件辨識警示區 (水平區域)</title>
+        <title>ESP32-CAM Область предупреждения о распознавании объекта (горизонтальная область)</title>
         <style>
           body{font-family:Arial,Helvetica,sans-serif;background:#181818;color:#EFEFEF;font-size:16px}h2{font-size:18px}section.main{display:flex}#menu,section.main{flex-direction:column}#menu{display:none;flex-wrap:nowrap;min-width:340px;background:#363636;padding:8px;border-radius:4px;margin-top:-10px;margin-right:10px}#content{display:flex;flex-wrap:wrap;align-items:stretch}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}figure img{display:block;width:100%;height:auto;border-radius:4px;margin-top:8px}@media (min-width: 800px) and (orientation:landscape){#content{display:flex;flex-wrap:nowrap;align-items:stretch}figure img{display:block;max-width:100%;max-height:calc(100vh - 40px);width:auto;height:auto}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}}section#buttons{display:flex;flex-wrap:nowrap;justify-content:space-between}#nav-toggle{cursor:pointer;display:block}#nav-toggle-cb{outline:0;opacity:0;width:0;height:0}#nav-toggle-cb:checked+#menu{display:flex}.input-group{display:flex;flex-wrap:nowrap;line-height:22px;margin:5px 0}.input-group>label{display:inline-block;padding-right:10px;min-width:47%}.input-group input,.input-group select{flex-grow:1}.range-max,.range-min{display:inline-block;padding:0 5px}button{display:block;margin:5px;padding:0 12px;border:0;line-height:28px;cursor:pointer;color:#fff;background:#ff3034;border-radius:5px;font-size:16px;outline:0}button:hover{background:#ff494d}button:active{background:#f21c21}button.disabled{cursor:default;background:#a0a0a0}input[type=range]{-webkit-appearance:none;width:100%;height:22px;background:#363636;cursor:pointer;margin:0}input[type=range]:focus{outline:0}input[type=range]::-webkit-slider-runnable-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-webkit-slider-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;-webkit-appearance:none;margin-top:-11.5px}input[type=range]:focus::-webkit-slider-runnable-track{background:#EFEFEF}input[type=range]::-moz-range-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-moz-range-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer}input[type=range]::-ms-track{width:100%;height:2px;cursor:pointer;background:0 0;border-color:transparent;color:transparent}input[type=range]::-ms-fill-lower{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-fill-upper{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;height:2px}input[type=range]:focus::-ms-fill-lower{background:#EFEFEF}input[type=range]:focus::-ms-fill-upper{background:#363636}.switch{display:block;position:relative;line-height:22px;font-size:16px;height:22px}.switch input{outline:0;opacity:0;width:0;height:0}.slider{width:50px;height:22px;border-radius:22px;cursor:pointer;background-color:grey}.slider,.slider:before{display:inline-block;transition:.4s}.slider:before{position:relative;content:"";border-radius:50%;height:16px;width:16px;left:4px;top:3px;background-color:#fff}input:checked+.slider{background-color:#ff3034}input:checked+.slider:before{-webkit-transform:translateX(26px);transform:translateX(26px)}select{border:1px solid #363636;font-size:14px;height:22px;outline:0;border-radius:5px}.image-container{position:relative;min-width:160px}.close{position:absolute;right:5px;top:5px;background:#ff3034;width:16px;height:16px;border-radius:100px;color:#fff;text-align:center;line-height:18px;cursor:pointer}.hidden{display:none}
         </style>
@@ -359,7 +359,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
     </head>
     <body>
     <figure>
-    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="設定" onclick="start();">
+    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="Набор" onclick="start();">
       <div id="stream-container" class="image-container hidden">
         <div class="close" id="close-stream">×</div>
         <img id="stream" src="" crossorigin="anonymous" style="background-color:#000000;display:none;">
@@ -513,7 +513,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                 </tbody></table>
             </section>         
             <div id="logo">
-                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;視訊設定</label>
+                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;視訊Набор</label>
             </div>
             <div id="content">
                 <div id="sidebar">
@@ -968,7 +968,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
     </head>
     <body>
     <figure>
-    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="設定" onclick="start();">
+    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="Набор" onclick="start();">
       <div id="stream-container" class="image-container hidden">
         <div class="close" id="close-stream">×</div>
         <img id="stream" src="" crossorigin="anonymous" style="background-color:#000000;display:none;">
@@ -1122,7 +1122,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
                 </tbody></table>
             </section>         
             <div id="logo">
-                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;視訊設定</label>
+                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;視訊Набор</label>
             </div>
             <div id="content">
                 <div id="sidebar">
@@ -1552,7 +1552,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
     </head>
     <body>
     <figure>
-    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="設定" onclick="start();">
+    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="Набор" onclick="start();">
       <div id="stream-container" class="image-container">
         <div class="close" id="close-stream">×</div>
         <img id="stream" src="" crossorigin="anonymous" style="background-color:#000000;display:none;">
@@ -1694,7 +1694,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
                 </tbody></table>
             </section>         
             <div id="logo">
-                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;視訊設定</label>
+                <label for="nav-toggle-cb" id="nav-toggle">☰&nbsp;&nbsp;視訊Набор</label>
             </div>
             <div id="content">
                 <div id="sidebar">
@@ -2326,7 +2326,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
   
           if (WiFi.status() == WL_CONNECTED) {
             WiFi.softAP((WiFi.localIP().toString()+"_"+P1).c_str(), P2.c_str());
-            for (int i=0;i<2;i++) {    //若連不上WIFI設定閃光燈慢速閃爍
+            for (int i=0;i<2;i++) {    //若連不上WIFIНабор閃光燈慢速閃爍
               ledcWrite(4,10);
               delay(300);
               ledcWrite(4,0);
@@ -2346,7 +2346,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
       }
 
       if (cmd=="resetwifi") {
-        httpd_resp_set_type(req, "text/html");  //設定回傳資料格式
+        httpd_resp_set_type(req, "text/html");  //Набор回傳資料格式
         httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");  //允許跨網域讀取
         if (WiFi.status() == WL_CONNECTED)
           return httpd_resp_send(req, (const char *)index_html, strlen(index_html));
@@ -2354,7 +2354,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
           return httpd_resp_send(req, (const char *)index_wifi_html, strlen(index_wifi_html)); 
       } else {
         const char *resp = Feedback.c_str();
-        httpd_resp_set_type(req, "text/html");  //設定回傳資料格式
+        httpd_resp_set_type(req, "text/html");  //Набор回傳資料格式
         httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");  //允許跨網域讀取
         return httpd_resp_send(req, resp, strlen(resp));
       }
@@ -2409,7 +2409,7 @@ void tone(int pin, int frequency, int duration) {
   ledcWriteTone(9, 0);
 }
 
-//顯示視訊參數狀態(須回傳json格式載入初始設定)
+//顯示視訊參數狀態(須回傳json格式載入初始Набор)
 static esp_err_t status_handler(httpd_req_t *req){
     static char json_response[1024];
 
@@ -2431,7 +2431,7 @@ static esp_err_t status_handler(httpd_req_t *req){
 
 //自訂網址路徑要執行的函式
 void startCameraServer(){
-  httpd_config_t config = HTTPD_DEFAULT_CONFIG();  //可在HTTPD_DEFAULT_CONFIG()中設定Server Port 
+  httpd_config_t config = HTTPD_DEFAULT_CONFIG();  //可在HTTPD_DEFAULT_CONFIG()中НаборServer Port 
 
   //http://192.168.xxx.xxx/
   httpd_uri_t index_uri = {
