@@ -390,11 +390,11 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                         <td colspan="2">
                           Позиционирование объекта
                           <select id="mark">
-                          <option value="center">中</option>               
-                          <option value="upper">上</option>
-                          <option value="lower" selected="selected">下</option>
-                          <option value="left">左</option>
-                          <option value="right">右</option>
+                          <option value="center">Центр</option>               
+                          <option value="upper">Верхний</option>
+                          <option value="lower" selected="selected">Нижний</option>
+                          <option value="left">Левый</option>
+                          <option value="right">Правый</option>
                           </select>
                             Отслеживание объектов
                             <select id="object" onchange="count.innerHTML='';">
@@ -891,7 +891,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                         alarm.play();
                       }
                       if (chkLine.checked)
-                        ifr.src = 'http:\/\/linenotify.com/notify.php?token='+token.value+'&message=警示區內有人員';                      
+                        ifr.src = 'http:\/\/linenotify.com/notify.php?token='+token.value+'&message=В буферной зоне находится персонал';                      
                       if (chkBuzzer.checked)
                         $.ajax({url: baseHost+'/control?buzzer='+position.innerHTML, async: false}); 
                       }
@@ -927,7 +927,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
           myForm.submit();
         } 
 
-        //  網址/?192.168.1.38  可自動帶入?後參數IP值
+        //  URL-адрес/?192.168.1.38  Может ли он быть введен автоматически?Значение IP-адреса после параметра
         var href=location.href;
         if (href.indexOf("?")!=-1) {
           ip.value = location.search.split("?")[1].replace(/http:\/\//g,"");
@@ -958,7 +958,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>ESP32-CAM 物件辨識警示區 (垂直區域)</title>
+        <title>ESP32-CAM Область предупреждения о распознавании объекта (вертикальная область)</title>
         <style>
           body{font-family:Arial,Helvetica,sans-serif;background:#181818;color:#EFEFEF;font-size:16px}h2{font-size:18px}section.main{display:flex}#menu,section.main{flex-direction:column}#menu{display:none;flex-wrap:nowrap;min-width:340px;background:#363636;padding:8px;border-radius:4px;margin-top:-10px;margin-right:10px}#content{display:flex;flex-wrap:wrap;align-items:stretch}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}figure img{display:block;width:100%;height:auto;border-radius:4px;margin-top:8px}@media (min-width: 800px) and (orientation:landscape){#content{display:flex;flex-wrap:nowrap;align-items:stretch}figure img{display:block;max-width:100%;max-height:calc(100vh - 40px);width:auto;height:auto}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}}section#buttons{display:flex;flex-wrap:nowrap;justify-content:space-between}#nav-toggle{cursor:pointer;display:block}#nav-toggle-cb{outline:0;opacity:0;width:0;height:0}#nav-toggle-cb:checked+#menu{display:flex}.input-group{display:flex;flex-wrap:nowrap;line-height:22px;margin:5px 0}.input-group>label{display:inline-block;padding-right:10px;min-width:47%}.input-group input,.input-group select{flex-grow:1}.range-max,.range-min{display:inline-block;padding:0 5px}button{display:block;margin:5px;padding:0 12px;border:0;line-height:28px;cursor:pointer;color:#fff;background:#ff3034;border-radius:5px;font-size:16px;outline:0}button:hover{background:#ff494d}button:active{background:#f21c21}button.disabled{cursor:default;background:#a0a0a0}input[type=range]{-webkit-appearance:none;width:100%;height:22px;background:#363636;cursor:pointer;margin:0}input[type=range]:focus{outline:0}input[type=range]::-webkit-slider-runnable-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-webkit-slider-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;-webkit-appearance:none;margin-top:-11.5px}input[type=range]:focus::-webkit-slider-runnable-track{background:#EFEFEF}input[type=range]::-moz-range-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-moz-range-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer}input[type=range]::-ms-track{width:100%;height:2px;cursor:pointer;background:0 0;border-color:transparent;color:transparent}input[type=range]::-ms-fill-lower{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-fill-upper{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;height:2px}input[type=range]:focus::-ms-fill-lower{background:#EFEFEF}input[type=range]:focus::-ms-fill-upper{background:#363636}.switch{display:block;position:relative;line-height:22px;font-size:16px;height:22px}.switch input{outline:0;opacity:0;width:0;height:0}.slider{width:50px;height:22px;border-radius:22px;cursor:pointer;background-color:grey}.slider,.slider:before{display:inline-block;transition:.4s}.slider:before{position:relative;content:"";border-radius:50%;height:16px;width:16px;left:4px;top:3px;background-color:#fff}input:checked+.slider{background-color:#ff3034}input:checked+.slider:before{-webkit-transform:translateX(26px);transform:translateX(26px)}select{border:1px solid #363636;font-size:14px;height:22px;outline:0;border-radius:5px}.image-container{position:relative;min-width:160px}.close{position:absolute;right:5px;top:5px;background:#ff3034;width:16px;height:16px;border-radius:100px;color:#fff;text-align:center;line-height:18px;cursor:pointer}.hidden{display:none}
         </style>
@@ -999,11 +999,11 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
                         <td colspan="2">
                           Позиционирование объекта
                           <select id="mark">
-                          <option value="center">中</option>               
-                          <option value="upper">上</option>
-                          <option value="lower" selected="selected">下</option>
-                          <option value="left">左</option>
-                          <option value="right">右</option>
+                          <option value="center">Центр</option>               
+                          <option value="upper">Верхний</option>
+                          <option value="lower" selected="selected">Нижний</option>
+                          <option value="left">Левый</option>
+                          <option value="right">Правый</option>
                           </select>
                             Отслеживание объектов
                             <select id="object" onchange="count.innerHTML='';">
@@ -1475,7 +1475,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
                         alarm.play();
                       }
                       if (chkLine.checked)
-                        ifr.src = 'http:\/\/linenotify.com/notify.php?token='+token.value+'&message=警示區內有人員';                      
+                        ifr.src = 'http:\/\/linenotify.com/notify.php?token='+token.value+'&message=В буферной зоне находится персонал';                      
                       if (chkBuzzer.checked)
                         $.ajax({url: baseHost+'/control?buzzer='+position.innerHTML, async: false}); 
                       }
@@ -1511,7 +1511,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
             myForm.submit();
           } 
       
-          //  網址/?192.168.1.38  可自動帶入?後參數IP值
+          //  URL-адрес/?192.168.1.38  Может ли он быть введен автоматически?Значение IP-адреса после параметра
           var href=location.href;
           if (href.indexOf("?")!=-1) {
             ip.value = location.search.split("?")[1].replace(/http:\/\//g,"");
@@ -1542,7 +1542,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
   <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>ESP32-CAM 物件辨識警示區 (自訂區域)</title>
+        <title>ESP32-CAM Зона предупреждения об идентификации объекта (Пользовательская область)</title>
         <style>
           body{font-family:Arial,Helvetica,sans-serif;background:#181818;color:#EFEFEF;font-size:16px}h2{font-size:18px}section.main{display:flex}#menu,section.main{flex-direction:column}#menu{display:none;flex-wrap:nowrap;min-width:340px;background:#363636;padding:8px;border-radius:4px;margin-top:-10px;margin-right:10px}#content{display:flex;flex-wrap:wrap;align-items:stretch}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}figure img{display:block;width:100%;height:auto;border-radius:4px;margin-top:8px}@media (min-width: 800px) and (orientation:landscape){#content{display:flex;flex-wrap:nowrap;align-items:stretch}figure img{display:block;max-width:100%;max-height:calc(100vh - 40px);width:auto;height:auto}figure{padding:0;margin:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0}}section#buttons{display:flex;flex-wrap:nowrap;justify-content:space-between}#nav-toggle{cursor:pointer;display:block}#nav-toggle-cb{outline:0;opacity:0;width:0;height:0}#nav-toggle-cb:checked+#menu{display:flex}.input-group{display:flex;flex-wrap:nowrap;line-height:22px;margin:5px 0}.input-group>label{display:inline-block;padding-right:10px;min-width:47%}.input-group input,.input-group select{flex-grow:1}.range-max,.range-min{display:inline-block;padding:0 5px}button{display:block;margin:5px;padding:0 12px;border:0;line-height:28px;cursor:pointer;color:#fff;background:#ff3034;border-radius:5px;font-size:16px;outline:0}button:hover{background:#ff494d}button:active{background:#f21c21}button.disabled{cursor:default;background:#a0a0a0}input[type=range]{-webkit-appearance:none;width:100%;height:22px;background:#363636;cursor:pointer;margin:0}input[type=range]:focus{outline:0}input[type=range]::-webkit-slider-runnable-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-webkit-slider-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;-webkit-appearance:none;margin-top:-11.5px}input[type=range]:focus::-webkit-slider-runnable-track{background:#EFEFEF}input[type=range]::-moz-range-track{width:100%;height:2px;cursor:pointer;background:#EFEFEF;border-radius:0;border:0 solid #EFEFEF}input[type=range]::-moz-range-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer}input[type=range]::-ms-track{width:100%;height:2px;cursor:pointer;background:0 0;border-color:transparent;color:transparent}input[type=range]::-ms-fill-lower{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-fill-upper{background:#EFEFEF;border:0 solid #EFEFEF;border-radius:0}input[type=range]::-ms-thumb{border:1px solid rgba(0,0,30,0);height:22px;width:22px;border-radius:50px;background:#ff3034;cursor:pointer;height:2px}input[type=range]:focus::-ms-fill-lower{background:#EFEFEF}input[type=range]:focus::-ms-fill-upper{background:#363636}.switch{display:block;position:relative;line-height:22px;font-size:16px;height:22px}.switch input{outline:0;opacity:0;width:0;height:0}.slider{width:50px;height:22px;border-radius:22px;cursor:pointer;background-color:grey}.slider,.slider:before{display:inline-block;transition:.4s}.slider:before{position:relative;content:"";border-radius:50%;height:16px;width:16px;left:4px;top:3px;background-color:#fff}input:checked+.slider{background-color:#ff3034}input:checked+.slider:before{-webkit-transform:translateX(26px);transform:translateX(26px)}select{border:1px solid #363636;font-size:14px;height:22px;outline:0;border-radius:5px}.image-container{position:relative;min-width:160px}.close{position:absolute;right:5px;top:5px;background:#ff3034;width:16px;height:16px;border-radius:100px;color:#fff;text-align:center;line-height:18px;cursor:pointer}.hidden{display:none}
         </style>
@@ -1571,11 +1571,11 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
                         <td colspan="2">
                           Позиционирование объекта
                           <select id="mark">
-                          <option value="center">中</option>               
-                          <option value="upper">上</option>
-                          <option value="lower" selected="selected">下</option>
-                          <option value="left">左</option>
-                          <option value="right">右</option>
+                          <option value="center">Центр</option>               
+                          <option value="upper">Верхний</option>
+                          <option value="lower" selected="selected">Нижний</option>
+                          <option value="left">Левый</option>
+                          <option value="right">Правый</option>
                           </select>
                             Отслеживание объектов
                             <select id="object" onchange="count.innerHTML='';">
@@ -2059,7 +2059,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
                         alarm.play();
                       }
                       if (chkLine.checked)
-                        ifr.src = 'http:\/\/linenotify.com/notify.php?token='+token.value+'&message=警示區內有人員';                        
+                        ifr.src = 'http:\/\/linenotify.com/notify.php?token='+token.value+'&message=В буферной зоне находится персонал';                        
                       if (chkBuzzer.checked)
                         $.ajax({url: baseHost+'/control?buzzer', async: false});  
                       }
@@ -2095,7 +2095,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
             myForm.submit();
           }
 
-          //  網址/?192.168.1.38  可自動帶入?後參數IP值
+          //  URL-адрес/?192.168.1.38  Может ли он быть введен автоматически?Значение IP-адреса после параметра
           var href=location.href;
           if (href.indexOf("?")!=-1) {
             ip.value = location.search.split("?")[1].replace(/http:\/\//g,"");
@@ -2120,7 +2120,7 @@ static esp_err_t index_Rect_handler(httpd_req_t *req) {
   return ESP_OK;
 }
 
-//影像截圖
+//Снимок экрана изображения
 static esp_err_t capture_handler(httpd_req_t *req){
     camera_fb_t * fb = NULL;
     esp_err_t res = ESP_OK;
@@ -2150,7 +2150,7 @@ static esp_err_t capture_handler(httpd_req_t *req){
     return res;
 }
 
-//影像串流
+//Потоковая передача изображений
 static esp_err_t stream_handler(httpd_req_t *req){
     camera_fb_t * fb = NULL;
     esp_err_t res = ESP_OK;
@@ -2213,7 +2213,7 @@ static esp_err_t stream_handler(httpd_req_t *req){
 
 //指令參數控制
 static esp_err_t cmd_handler(httpd_req_t *req){
-    char*  buf;    //存取網址後帶的參數字串
+    char*  buf;    //存取URL-адрес後帶的參數字串
     size_t buf_len;
     char variable[128] = {0,};  //存取參數var值
     char value[128] = {0,};     //存取參數val值
@@ -2243,7 +2243,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
     Feedback="";Command="";cmd="";P1="";P2="";P3="";P4="";P5="";P6="";P7="";P8="";P9="";
     ReceiveState=0,cmdState=1,strState=1,questionstate=0,equalstate=0,semicolonstate=0;     
     if (myCmd.length()>0) {
-      myCmd = "?"+myCmd;  //網址後帶的參數字串轉換成Пользовательский формат команды
+      myCmd = "?"+myCmd;  //URL-адрес後帶的參數字串轉換成Пользовательский формат команды
       for (int i=0;i<myCmd.length();i++) {
         getCommand(char(myCmd.charAt(i)));  //拆解自訂指令參數字串
       }
@@ -2326,7 +2326,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
   
           if (WiFi.status() == WL_CONNECTED) {
             WiFi.softAP((WiFi.localIP().toString()+"_"+P1).c_str(), P2.c_str());
-            for (int i=0;i<2;i++) {    //若連不上WIFIНаборВспышка慢速閃爍
+            for (int i=0;i<2;i++) {    //若連不ВерхнийWIFIНаборВспышка慢速閃爍
               ledcWrite(4,10);
               delay(300);
               ledcWrite(4,0);
@@ -2337,7 +2337,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
           }
         }
       } 
-      else if (cmd=="clearwifi") {  //清除閃存中Wi-Fi資料  
+      else if (cmd=="clearwifi") {  //清除閃存ЦентрWi-Fi資料  
         Preferences_write("wifi", "ssid", "");
         Preferences_write("wifi", "password", "");
       }                      
@@ -2429,9 +2429,9 @@ static esp_err_t status_handler(httpd_req_t *req){
     return httpd_resp_send(req, json_response, strlen(json_response));
 }
 
-//自訂網址路徑要執行的函式
+//自訂URL-адрес路徑要執行的函式
 void startCameraServer(){
-  httpd_config_t config = HTTPD_DEFAULT_CONFIG();  //可在HTTPD_DEFAULT_CONFIG()中НаборServer Port 
+  httpd_config_t config = HTTPD_DEFAULT_CONFIG();  //可在HTTPD_DEFAULT_CONFIG()ЦентрНаборServer Port 
 
   //http://192.168.xxx.xxx/
   httpd_uri_t index_uri = {
@@ -2503,7 +2503,7 @@ void startCameraServer(){
     
   Serial.printf("Starting web server on port: '%d'\n", config.server_port);  //Server Port
   if (httpd_start(&camera_httpd, &config) == ESP_OK) {
-      //註冊自訂網址路徑對應執行的函式
+      //註冊自訂URL-адрес路徑對應執行的函式
       httpd_register_uri_handler(camera_httpd, &index_uri);
       httpd_register_uri_handler(camera_httpd, &cmd_uri);
       httpd_register_uri_handler(camera_httpd, &status_uri);
