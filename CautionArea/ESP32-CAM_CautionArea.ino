@@ -2260,15 +2260,15 @@ static esp_err_t cmd_handler(httpd_req_t *req){
         // You can do anything
         // Feedback="<font color=\"red\">Hello World</font>";   //Может быть общий текст или синтаксис HTML
       }
-      else if (cmd=="ip") {  //查詢APIP, STAIP
+      else if (cmd=="ip") {  //запрос APIP, STAIP
         Feedback="AP IP: "+WiFi.softAPIP().toString();    
         Feedback+="<br>";
         Feedback+="STA IP: "+WiFi.localIP().toString();
       }  
-      else if (cmd=="mac") {  //查詢MAC位址
+      else if (cmd=="mac") {  //запрос MAC адрес 
         Feedback="STA MAC: "+WiFi.macAddress();
       }  
-      else if (cmd=="restart") {  //重設WIFI連線
+      else if (cmd=="restart") {  //сброс WIFI соединения 
         ESP.restart();
       }  
       else if (cmd=="digitalwrite") {
@@ -2297,7 +2297,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
       else if (cmd=="touchread") {
         Feedback=String(touchRead(P1.toInt()));
       }   
-      else if (cmd=="flash") {  //控制內建Вспышка
+      else if (cmd=="flash") {  //встроенный пульт управления Вспышка
         ledcAttachPin(4, 4);  
         ledcSetup(4, 5000, 8);   
         int val = P1.toInt();
@@ -2326,7 +2326,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
   
           if (WiFi.status() == WL_CONNECTED) {
             WiFi.softAP((WiFi.localIP().toString()+"_"+P1).c_str(), P2.c_str());
-            for (int i=0;i<2;i++) {    //若連不ВерхнийWIFIНаборВспышка慢速閃爍
+            for (int i=0;i<2;i++) {    //Если вы не можете подключиться Верхний WIFI Набор Вспышка  медленное мигание
               ledcWrite(4,10);
               delay(300);
               ledcWrite(4,0);
@@ -2337,7 +2337,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
           }
         }
       } 
-      else if (cmd=="clearwifi") {  //清除閃存ЦентрWi-Fi資料  
+      else if (cmd=="clearwifi") {  //Очистить флэш-память от данных Wi-Fi  
         Preferences_write("wifi", "ssid", "");
         Preferences_write("wifi", "password", "");
       }                      
@@ -2346,21 +2346,21 @@ static esp_err_t cmd_handler(httpd_req_t *req){
       }
 
       if (cmd=="resetwifi") {
-        httpd_resp_set_type(req, "text/html");  //Набор回傳資料格式
-        httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");  //允許跨網域讀取
+        httpd_resp_set_type(req, "text/html");  //Набор возвращаемых данных
+        httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");  //Разрешить междоменное чтение
         if (WiFi.status() == WL_CONNECTED)
           return httpd_resp_send(req, (const char *)index_html, strlen(index_html));
         else
           return httpd_resp_send(req, (const char *)index_wifi_html, strlen(index_wifi_html)); 
       } else {
         const char *resp = Feedback.c_str();
-        httpd_resp_set_type(req, "text/html");  //Набор回傳資料格式
-        httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");  //允許跨網域讀取
+        httpd_resp_set_type(req, "text/html");  //Набор возвращаемых данных
+        httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");  //Разрешить междоменное чтение
         return httpd_resp_send(req, resp, strlen(resp));
       }
     } 
     else {
-      //官方指令區塊，也可在此自訂指令  http://192.168.xxx.xxx/control?var=xxx&val=xxx
+      //Блок официальных инструкций，вы также можете настроить инструкции здесь  http://192.168.xxx.xxx/control?var=xxx&val=xxx
       int val = atoi(value);
       sensor_t * s = esp_camera_sensor_get();
       int res = 0;
@@ -2374,7 +2374,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
       else if(!strcmp(variable, "brightness")) res = s->set_brightness(s, val);
       else if(!strcmp(variable, "hmirror")) res = s->set_hmirror(s, val);
       else if(!strcmp(variable, "vflip")) res = s->set_vflip(s, val);
-      else if(!strcmp(variable, "flash")) {  //自訂Вспышка指令
+      else if(!strcmp(variable, "flash")) {  //Пользовательские настройки для вспышки
         ledcAttachPin(4, 4);  
         ledcSetup(4, 5000, 8);        
         ledcWrite(4,val);
@@ -2392,7 +2392,7 @@ static esp_err_t cmd_handler(httpd_req_t *req){
         const char *resp = Feedback.c_str();
         httpd_resp_set_type(req, "text/html");
         httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
-        return httpd_resp_send(req, resp, strlen(resp));  //回傳 параметр строка
+        return httpd_resp_send(req, resp, strlen(resp));  //Обратная передача параметр строка
       }
       else {
         httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
@@ -2409,7 +2409,7 @@ void tone(int pin, int frequency, int duration) {
   ledcWriteTone(9, 0);
 }
 
-//顯示Видео  параметр 狀態(須回傳json格式載入初始Набор)
+//顯示Видео  параметр 狀態(須Обратная передачаjson格式載入初始Набор)
 static esp_err_t status_handler(httpd_req_t *req){
     static char json_response[1024];
 
