@@ -295,7 +295,7 @@ static size_t jpg_encode_stream(void * arg, size_t index, const void* data, size
     j->len += len;
     return len;
 }
-
+//********************************************************************************************
 static const char PROGMEM index_html[] = R"rawliteral(
   <!doctype html>
   <html>
@@ -319,7 +319,7 @@ static esp_err_t index_handler(httpd_req_t *req){
   httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");  //Разрешить междоменное чтение
   return httpd_resp_send(req, (const char *)index_html, strlen(index_html));
 }
-
+//********************************************************************************************
 static const char index_wifi_html[] PROGMEM = R"rawliteral(
   <!doctype html>
   <html>
@@ -331,7 +331,7 @@ static const char index_wifi_html[] PROGMEM = R"rawliteral(
       <body>
       WIFI SSID: <input type="text" id="ssid"><br>
       WIFI  PWD: <input type="text" id="pwd"><br>
-      <input type="button" value="Набор" onclick="location.href='/control?resetwifi='+document.getElementById('ssid').value+';'+document.getElementById('pwd').value;">
+      <input type="button" value="Задайте настройки WiFi" onclick="location.href='/control?resetwifi='+document.getElementById('ssid').value+';'+document.getElementById('pwd').value;">
       </body>
   </html>        
 )rawliteral";
@@ -381,7 +381,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
         <section class="main">
             <section id="buttons">
                 <table>
-                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">啟動Видео </button></td></tr>
+                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">Начать видео </button></td></tr>
                 <tr>
                   <td colspan="3">
                     <table>
@@ -397,6 +397,11 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                           <option value="right">Правый</option>
                           </select>
                             Отслеживание объектов
+                         <div id="selectContainer">
+                           <!-- Здесь будет вставлен selectOptions -->
+                         </div>
+
+<!--
                             <select id="object" onchange="count.innerHTML='';">
                               <option value="person" selected="selected">person</option>
                               <option value="bicycle">bicycle</option>
@@ -478,7 +483,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                               <option value="teddy bear">teddy bear</option>
                               <option value="hair drier">hair drier</option>
                               <option value="toothbrush">toothbrush</option>
-                            </select>
+                            </select> -->
                             <span id="count" style="color:red">0</span>
                         </td>             
                       </tr>
@@ -503,7 +508,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                         <input id="complementary" type="checkbox">Обнаружение обратной зоны
                         </td>           
                       </tr>             
-                      <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук(mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
+                      <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук (mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
                       <tr><td><input type="checkbox" id="chkBuzzer">Зуммер(IO2)</td><td></td></tr>
                       <tr><td colspan="2"><input type="checkbox" id="chkLine">Скипетр линейного уведомления<input type="text" id="token" size="10" value=""><input type="button" value="Передача изображения" onclick="SendCapturedImage();"></td></tr> 
                       <tr><td colspan="2"><span id="message" style="display:none"></span></td><td></td></tr> 
@@ -583,6 +588,96 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
     
         <script>
         var baseHost = "";
+        const selectOptions = `
+          <select id="object" onchange="count.innerHTML='';">
+                              <option value="person" selected="selected">person</option>
+                              <option value="bicycle">bicycle</option>
+                              <option value="car">car</option>
+                              <option value="motorcycle">motorcycle</option>
+                              <option value="airplane">airplane</option>
+                              <option value="bus">bus</option>
+                              <option value="train">train</option>
+                              <option value="truck">truck</option>
+                              <option value="boat">boat</option>
+                              <option value="traffic light">traffic light</option>
+                              <option value="fire hydrant">fire hydrant</option>
+                              <option value="stop sign">stop sign</option>
+                              <option value="parking meter">parking meter</option>
+                              <option value="bench">bench</option>
+                              <option value="bird">bird</option>
+                              <option value="cat">cat</option>
+                              <option value="dog">dog</option>
+                              <option value="horse">horse</option>
+                              <option value="sheep">sheep</option>
+                              <option value="cow">cow</option>
+                              <option value="elephant">elephant</option>
+                              <option value="bear">bear</option>
+                              <option value="zebra">zebra</option>
+                              <option value="giraffe">giraffe</option>
+                              <option value="backpack">backpack</option>
+                              <option value="umbrella">umbrella</option>
+                              <option value="handbag">handbag</option>
+                              <option value="tie">tie</option>
+                              <option value="suitcase">suitcase</option>
+                              <option value="frisbee">frisbee</option>
+                              <option value="skis">skis</option>
+                              <option value="snowboard">snowboard</option>
+                              <option value="sports ball">sports ball</option>
+                              <option value="kite">kite</option>
+                              <option value="baseball bat">baseball bat</option>
+                              <option value="baseball glove">baseball glove</option>
+                              <option value="skateboard">skateboard</option>
+                              <option value="surfboard">surfboard</option>
+                              <option value="tennis racket">tennis racket</option>
+                              <option value="bottle">bottle</option>
+                              <option value="wine glass">wine glass</option>
+                              <option value="cup">cup</option>
+                              <option value="fork">fork</option>
+                              <option value="knife">knife</option>
+                              <option value="spoon">spoon</option>
+                              <option value="bowl">bowl</option>
+                              <option value="banana">banana</option>
+                              <option value="apple">apple</option>
+                              <option value="sandwich">sandwich</option>
+                              <option value="orange">orange</option>
+                              <option value="broccoli">broccoli</option>
+                              <option value="carrot">carrot</option>
+                              <option value="hot dog">hot dog</option>
+                              <option value="pizza">pizza</option>
+                              <option value="donut">donut</option>
+                              <option value="cake">cake</option>
+                              <option value="chair">chair</option>
+                              <option value="couch">couch</option>
+                              <option value="potted plant">potted plant</option>
+                              <option value="bed">bed</option>
+                              <option value="dining table">dining table</option>
+                              <option value="toilet">toilet</option>
+                              <option value="tv">tv</option>
+                              <option value="laptop">laptop</option>
+                              <option value="mouse">mouse</option>
+                              <option value="remote">remote</option>
+                              <option value="keyboard">keyboard</option>
+                              <option value="cell phone">cell phone</option>
+                              <option value="microwave">microwave</option>
+                              <option value="oven">oven</option>
+                              <option value="toaster">toaster</option>
+                              <option value="sink">sink</option>
+                              <option value="refrigerator">refrigerator</option>
+                              <option value="book">book</option>
+                              <option value="clock">clock</option>
+                              <option value="vase">vase</option>
+                              <option value="scissors">scissors</option>
+                              <option value="teddy bear">teddy bear</option>
+                              <option value="hair drier">hair drier</option>
+                              <option value="toothbrush">toothbrush</option>
+                            </select>';
+          // Найти элемент, в который вы хотите вставить select
+             const selectContainer = document.getElementById("selectContainer");
+
+         // Вставить selectOptions внутрь selectContainer
+            selectContainer.innerHTML = selectOptions;
+
+
         function start() {
             baseHost = 'http:\/\/'+document.getElementById("ip").value;  //var baseHost = document.location.origin
             var streamUrl = baseHost + ':81';
@@ -751,7 +846,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
             cocoSsd.load().then(cocoSsd_Model => {
               Model = cocoSsd_Model;
               getStill.style.display = "block";
-              result.innerHTML = "Пожалуйста, нажмите кнопку Запуск видео ";
+              result.innerHTML = "Пожалуйста, нажмите кнопку Начать видео ";
             }); 
           }
           
@@ -951,7 +1046,7 @@ static esp_err_t index_HorizontalLine_handler(httpd_req_t *req) {
   httpd_resp_send(req, (const char *)index_HorizontalLine_html, strlen(index_HorizontalLine_html));
   return ESP_OK;
 }
-
+//********************************************************************************************
 static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE html>
 <html>
@@ -990,7 +1085,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
         <section class="main">
             <section id="buttons">
                 <table>
-                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">啟動Видео </button></td></tr>
+                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">Начать Видео </button></td></tr>
                 <tr>
                   <td colspan="3">
                     <table>
@@ -1112,7 +1207,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
                         <input id="complementary" type="checkbox">Обнаружение обратной зоны
                         </td>           
                       </tr>          
-                      <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук(mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
+                      <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук (mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
                       <tr><td><input type="checkbox" id="chkBuzzer">Зуммер(IO2)</td><td></td></tr>
                       <tr><td colspan="2"><input type="checkbox" id="chkLine">Скипетр линейного уведомления<input type="text" id="token" size="10" value=""><input type="button" value="Передача изображения" onclick="SendCapturedImage();"></td></tr> 
                       <tr><td colspan="2"><span id="message" style="display:none"></span></td><td></td></tr> 
@@ -1358,7 +1453,7 @@ static const char index_VerticalLine_html[] PROGMEM = R"rawliteral(
             cocoSsd.load().then(cocoSsd_Model => {
               Model = cocoSsd_Model;
               getStill.style.display = "block";
-              result.innerHTML = "Пожалуйста, нажмите кнопку Запуск Видео ";
+              result.innerHTML = "Пожалуйста, нажмите кнопку Начать видео ";
             }); 
           }
           
@@ -1535,7 +1630,7 @@ static esp_err_t index_VerticalLine_handler(httpd_req_t *req) {
   httpd_resp_send(req, (const char *)index_VerticalLine_html, strlen(index_VerticalLine_html));
   return ESP_OK;
 }
-
+//********************************************************************************************
 static const char index_Rect_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE html>
 <html>
@@ -1562,7 +1657,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
         <section class="main">
             <section id="buttons">
                 <table>
-                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">啟動Видео </button></td></tr>
+                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">Начать Видео </button></td></tr>
                 <tr>
                   <td colspan="3">
                     <table>
@@ -1684,7 +1779,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
                           <input id="complementary" type="checkbox">Обнаружение обратной зоны
                         </td>
                       </tr>         
-                      <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук(mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
+                      <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук (mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
                       <tr><td><input type="checkbox" id="chkBuzzer">Зуммер(IO2)</td><td></td></tr>
                       <tr><td colspan="2"><input type="checkbox" id="chkLine">Скипетр линейного уведомления<input type="text" id="token" size="10" value=""><input type="button" value="Передача изображения" onclick="SendCapturedImage();"></td></tr> 
                       <tr><td colspan="2"><span id="message" style="display:none"></span></td><td></td></tr> 
@@ -1971,7 +2066,7 @@ static const char index_Rect_html[] PROGMEM = R"rawliteral(
             cocoSsd.load().then(cocoSsd_Model => {
               Model = cocoSsd_Model;
               getStill.style.display = "block";
-              result.innerHTML = "Пожалуйста, нажмите кнопку Запуск Видео ";
+              result.innerHTML = "Пожалуйста, нажмите кнопку Начать видео ";
             }); 
           }
           
@@ -2119,7 +2214,7 @@ static esp_err_t index_Rect_handler(httpd_req_t *req) {
   httpd_resp_send(req, (const char *)index_Rect_html, strlen(index_Rect_html));
   return ESP_OK;
 }
-
+//********************************************************************************************
 //Снимок экрана изображения
 static esp_err_t capture_handler(httpd_req_t *req){
     camera_fb_t * fb = NULL;
@@ -2149,7 +2244,7 @@ static esp_err_t capture_handler(httpd_req_t *req){
     esp_camera_fb_return(fb);
     return res;
 }
-
+//********************************************************************************************
 //Потоковая передача изображений
 static esp_err_t stream_handler(httpd_req_t *req){
     camera_fb_t * fb = NULL;
@@ -2210,7 +2305,7 @@ static esp_err_t stream_handler(httpd_req_t *req){
 
     return res;
 }
-
+//********************************************************************************************
 //Управление командными параметрами
 static esp_err_t cmd_handler(httpd_req_t *req){
     char*  buf;    //доступ URL-адрес cтрока параметра, за которой следует
@@ -2408,7 +2503,7 @@ void tone(int pin, int frequency, int duration) {
   delay(duration);
   ledcWriteTone(9, 0);
 }
-
+//********************************************************************************************
 //Отображение  Видео  параметр статус(должен Обратная передача json начальная загрузка формата Набор)
 static esp_err_t status_handler(httpd_req_t *req){
     static char json_response[1024];
