@@ -445,7 +445,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
     </head>
     <body>
     <figure>
-    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="Набор" onclick="start();">
+    ESP32-CAM IP：<input type="text" id="ip" size="14" value="192.168.">&nbsp;&nbsp;<input type="button" value="ОК" onclick="start();">
       <div id="stream-container" class="image-container hidden">
         <div class="close" id="close-stream">×</div>
         <img id="stream" src="" crossorigin="anonymous" style="background-color:#000000;display:none;">
@@ -467,7 +467,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
         <section class="main">
             <section id="buttons">
                 <table>
-                <tr><td><button id="restartButton">Снова включите питание</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">Начать видео </button></td></tr>
+                <tr><td><button id="restartButton">Reset ESP</button></td><td><button id="toggle-stream" style="display:none">Start Stream</button></td><td align="right"><button id="face_enroll" style="display:none" class="disabled" disabled="disabled"></button><button id="get-still" style="display:none;">Начать видео </button></td></tr>
                 <tr>
                   <td colspan="3">
                     <table>
