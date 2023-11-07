@@ -3,14 +3,14 @@ ESP32-CAM Caution area for Cellphone (tfjs coco-ssd)
 Author : ChungYi Fu (Kaohsiung, Taiwan)  2021-7-31 00:00
 https://www.facebook.com/francefu
 
-物件類別
+Категория объекта
 https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts
 
-http://192.168.xxx.xxx             //網頁首頁管理介面
-http://192.168.xxx.xxx:81/stream   //取得串流影像       <img src="http://192.168.xxx.xxx:81/stream">
-http://192.168.xxx.xxx/capture     //取得影像          <img src="http://192.168.xxx.xxx/capture">
-http://192.168.xxx.xxx/status      //取得視訊參數值
-http://192.168.xxx.xxx/wifi        //設定區域網路Wi-Fi帳號密碼 
+http://192.168.xxx.xxx             //Интерфейс управления домашней страницей
+http://192.168.xxx.xxx:81/stream   //Адрес потокового изображения       <img src="http://192.168.xxx.xxx:81/stream">
+http://192.168.xxx.xxx/capture     //Получить статичное изображение          <img src="http://192.168.xxx.xxx/capture">
+http://192.168.xxx.xxx/status      //Получение значений видеопараметров
+http://192.168.xxx.xxx/wifi        //Установите пароль учетной записи Wi-Fi в локальной сети 
  
 自訂指令格式 :  
 http://APIP/control?cmd=P1;P2;P3;P4;P5;P6;P7;P8;P9
