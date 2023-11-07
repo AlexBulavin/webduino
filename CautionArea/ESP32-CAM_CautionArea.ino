@@ -2409,7 +2409,7 @@ void tone(int pin, int frequency, int duration) {
   ledcWriteTone(9, 0);
 }
 
-//顯示Видео  параметр 狀態(須Обратная передачаjson格式載入初始Набор)
+//Отображение  Видео  параметр статус(должен Обратная передача json начальная загрузка формата Набор)
 static esp_err_t status_handler(httpd_req_t *req){
     static char json_response[1024];
 
@@ -2429,9 +2429,9 @@ static esp_err_t status_handler(httpd_req_t *req){
     return httpd_resp_send(req, json_response, strlen(json_response));
 }
 
-//自訂URL-адрес路徑要執行的函式
+//настроить URL-адрес Путь к функции, которая должна быть выполнена
 void startCameraServer(){
-  httpd_config_t config = HTTPD_DEFAULT_CONFIG();  //可在HTTPD_DEFAULT_CONFIG()ЦентрНаборServer Port 
+  httpd_config_t config = HTTPD_DEFAULT_CONFIG();  //Доступно в HTTPD_DEFAULT_CONFIG()ЦентрНаборServer Port 
 
   //http://192.168.xxx.xxx/
   httpd_uri_t index_uri = {
@@ -2503,7 +2503,7 @@ void startCameraServer(){
     
   Serial.printf("Starting web server on port: '%d'\n", config.server_port);  //Server Port
   if (httpd_start(&camera_httpd, &config) == ESP_OK) {
-      //註冊自訂URL-адрес路徑對應執行的函式
+      //зарегистрировать настроить URL-адрес Путь соответствует выполняемой функции
       httpd_register_uri_handler(camera_httpd, &index_uri);
       httpd_register_uri_handler(camera_httpd, &cmd_uri);
       httpd_register_uri_handler(camera_httpd, &status_uri);
@@ -2522,7 +2522,7 @@ void startCameraServer(){
   }
 }
 
-//自訂指令拆解 параметр строка置入變數
+//настроить Инструкция по разборке  параметр строка Переменная места
 void getCommand(char c)
 {
   if (c=='?') ReceiveState=1;
