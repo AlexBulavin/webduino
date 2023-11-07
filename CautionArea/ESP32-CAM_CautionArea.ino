@@ -168,7 +168,7 @@ void setup() {
   //   
   // if PSRAM IC present, init with UXGA resolution and higher JPEG quality
   //                      for larger pre-allocated frame buffer.
-  if(psramFound()){  //是否有PSRAM(Psuedo SRAM)記憶體IC
+  if(psramFound()){  //Проверяем существует ли микросхема памяти PSRAM (Psuedo SRAM)?
     config.frame_size = FRAMESIZE_UXGA;
     config.jpeg_quality = 10;
     config.fb_count = 2;
@@ -178,14 +178,14 @@ void setup() {
     config.fb_count = 1;
   }
 
-  //視訊初始化
+  //Инициализация видео
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
     Serial.printf("Camera init failed with error 0x%x", err);
     ESP.restart();
   }
 
-  //可自訂視訊框架預設大小(解析度大小)
+  //Настраиваемый размер видеокадра по умолчанию (размер разрешения)
   sensor_t * s = esp_camera_sensor_get();
   // initial sensors are flipped vertically and colors are a bit saturated
   if (s->id.PID == OV3660_PID) {
@@ -195,17 +195,17 @@ void setup() {
   }
 
   //drop down frame size for higher initial frame rate
-  s->set_framesize(s, FRAMESIZE_QVGA);  //設定初始化影像解析度
-  s->set_hmirror(s, 1);  //鏡像
+  s->set_framesize(s, FRAMESIZE_QVGA);  //Установите разрешение изображения при инициализации
+  s->set_hmirror(s, 1);  //Зеркальное отражение
   
-  //閃光燈
+  //Вспышка/подсветка
   ledcAttachPin(4, 4);  
   ledcSetup(4, 5000, 8);    
   
   WiFi.mode(WIFI_AP_STA);
 
   Serial.println();
-  //設定預設區域網路Wi-Fi帳號與密碼，或清除Wi-Fi設定
+  //Установите номер учетной записи Wi-Fi локальной сети по умолчанию и пароль или очистите настройки Wi-Fi
   //Preferences_write("wifi", "ssid", "");
   //Preferences_write("wifi", "password", "");
         
@@ -214,7 +214,7 @@ void setup() {
 
   if (wifi_ssid!="") {
     for (int i=0;i<2;i++) {
-      WiFi.begin(wifi_ssid.c_str(), wifi_password.c_str());    //執行網路連線
+      WiFi.begin(wifi_ssid.c_str(), wifi_password.c_str());    //Выполните подключение к сети
     
       delay(1000);
       Serial.println("");
@@ -224,17 +224,17 @@ void setup() {
       long int StartTime=millis();
       while (WiFi.status() != WL_CONNECTED) {
           delay(500);
-          if ((StartTime+5000) < millis()) break;    //等待10秒連線
+          if ((StartTime+5000) < millis()) break;    //Подождите 10 секунд для подключения
       } 
     
-      if (WiFi.status() == WL_CONNECTED) {    //若連線成功
-        WiFi.softAP((WiFi.localIP().toString()+"_"+(String)apssid).c_str(), appassword);   //設定SSID顯示客戶端IP         
+      if (WiFi.status() == WL_CONNECTED) {    //Если соединение установлено успешно
+        WiFi.softAP((WiFi.localIP().toString()+"_"+(String)apssid).c_str(), appassword);   //Установите SSID для отображения IP-адреса клиента         
         Serial.println("");
         Serial.println("STAIP address: ");
         Serial.println(WiFi.localIP());
         Serial.println("");
     
-        for (int i=0;i<5;i++) {   //若連上WIFI設定閃光燈快速閃爍
+        for (int i=0;i<5;i++) {   //Если вспышка подключена к Wi-Fi, установите режим быстрой вспышки
           ledcWrite(4,10);
           delay(200);
           ledcWrite(4,0);
@@ -248,10 +248,10 @@ void setup() {
     } 
   }
 
-  if (WiFi.status() != WL_CONNECTED) {    //若連線失敗
+  if (WiFi.status() != WL_CONNECTED) {    //Если соединение не удается
     WiFi.softAP((WiFi.softAPIP().toString()+"_"+(String)apssid).c_str(), appassword);         
 
-    for (int i=0;i<2;i++) {    //若連不上WIFI設定閃光燈慢速閃爍
+    for (int i=0;i<2;i++) {    //Если вы не можете подключиться к Wi-Fi, установите режим медленного мигания вспышки
       ledcWrite(4,10);
       delay(1000);
       ledcWrite(4,0);
@@ -265,7 +265,7 @@ void setup() {
   Serial.println();
   startCameraServer(); 
 
-  //設定閃光燈為低電位
+  //Установите вспышку на низкий потенциал
   pinMode(4, OUTPUT);
   digitalWrite(4, LOW);      
 }
@@ -305,7 +305,7 @@ static const char PROGMEM index_html[] = R"rawliteral(
           <title>ESP32-CAM Caution Area</title>  
       </head>
       <body>
-      <button onclick="location.href='/wifi';">設定Wi-Fi</button>
+      <button onclick="location.href='/wifi';">Настройка Wi-Fi</button>
       <button onclick="location.href='/HorizontalLine';">水平警示區</button>
       <button onclick="location.href='/VerticalLine';">垂直警示區</button>
       <button onclick="location.href='/Rect';">框選警示區</button>
