@@ -3,6 +3,9 @@ ESP32-CAM Caution area for Cellphone (tfjs coco-ssd)
 Author : ChungYi Fu (Kaohsiung, Taiwan)  2021-7-31 00:00
 https://www.facebook.com/francefu
 
+Работает примерно так: при попазании заданного объекта в зону видимости (не в кадр вообще, а в обозначенную зону) происходит настроенное действие.
+
+
 Необходимо изменить настройки браузера: разрешен доступ к небезопасному контенту.В противном случае незашифрованная ссылка http будет заблокирована и не сможет передаваться в потоковом режиме!Если вы загружаете веб-страницу на этот компьютер для выполнения, вам не нужно изменять настройки безопасности.
 Выполнение URL-адреса браузера
 
@@ -480,10 +483,10 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                           Позиционирование объекта
                           <select id="mark">
                           <option value="center">Центр</option>               
-                          <option value="upper">Верхний</option>
-                          <option value="lower" selected="selected">Нижний</option>
-                          <option value="left">Левый</option>
-                          <option value="right">Правый</option>
+                          <option value="upper">Сверху</option>
+                          <option value="lower" selected="selected">Снизу</option>
+                          <option value="left">Слева</option>
+                          <option value="right">Справа</option>
                           </select>
                             Отслеживание объектов
                           <div id="selectContainer"></div>
@@ -514,7 +517,7 @@ static const char index_HorizontalLine_html[] PROGMEM = R"rawliteral(
                       </tr>             
                       <tr><td><input type="checkbox" id="chkAud">Предупреждающий звук (mp3)</td><td><input type="text" id="aud" size="20" value="https:\/\/fustyles.github.io/webduino/paino_c.mp3"></td></tr> 
                       <tr><td><input type="checkbox" id="chkBuzzer">Зуммер(IO2)</td><td></td></tr>
-                      <tr><td colspan="2"><input type="checkbox" id="chkLine">Скипетр линейного уведомления<input type="text" id="token" size="10" value=""><input type="button" value="Передача изображения" onclick="SendCapturedImage();"></td></tr> 
+                      <tr><td colspan="2"><input type="checkbox" id="chkLine">Линия захвата изображения<input type="text" id="token" size="10" value=""><input type="button" value="Передать изображение" onclick="SendCapturedImage();"></td></tr> 
                       <tr><td colspan="2"><span id="message" style="display:none"></span></td><td></td></tr> 
                     </tbody></table> 
                   </td>
